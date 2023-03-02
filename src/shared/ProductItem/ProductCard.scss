@@ -1,0 +1,104 @@
+@import "../../styles/variables.scss";
+
+.product-card {
+    position: relative;
+    z-index: 1;
+    background-color: $product-card-bg;
+    border-radius: 0.4rem;
+    display: block;
+    max-height: 100%;
+    padding: 3.6rem 0.8rem 2.4rem;
+    width: 264px;
+    
+    &:hover{
+        border-radius: 4px;
+        .product-card__overlay {
+            background-color: $primary-5;
+            border-radius: 0.4rem;
+        }
+        .product-card__btn {
+            color: $primary-40;
+        }
+    }
+    &__link{
+        text-decoration: none;
+        
+        z-index: 2;
+    }
+    &__overlay{
+        z-index: 3;
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        pointer-events: none;
+        background-color: transparent;
+        transition: background-color 0.3s ease, border-radius 0.3s ease;
+    }
+    &__img{
+        display: block;
+        width: 100%;
+        margin-bottom: 1.8rem;
+    }
+    &__brand {
+        text-align: center;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        color: #000;
+        font-weight: 400;
+        margin-bottom: 0.8rem;
+    }
+    &__name {
+        text-align: center;
+        color: $primary-40;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+    &__price{
+        text-align: center;
+        color: #000;
+        margin-top: 2.5rem;
+        font-size: 1.4rem;
+    }
+    &__buttons{
+        position: absolute;
+        top: 1.6rem;
+        right: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        z-index: 4;
+    }
+    &__btn{
+        position: relative;
+        z-index: 5;
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+        color: $background;
+        transition: color 0.3s ease;
+    }
+    &__btn-star{
+        margin-bottom: 0.8rem;
+        svg {
+            transition: fill 0.3s ease;
+        }
+        &:hover {
+            svg {
+                fill: #000;
+            }
+        }
+    }
+    &__btn-search {
+        svg {
+            transition: stroke 0.3s ease;
+        }
+        &:hover {
+            svg {
+                stroke: #000;
+            }
+        }
+    }
+}

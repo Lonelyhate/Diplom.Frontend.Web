@@ -1,0 +1,68 @@
+@import "../../../styles/variables.scss";
+
+.profile-popup {
+  width: 320px;
+  padding: 0 24px;
+  &__items {
+    &:hover {
+      .profile-popup__account-svg {
+        transform: translate(5px);
+        opacity: 0.5;
+      }
+    }
+    &:not(:first-child) {
+      border-top: 1px solid $primary-5;
+    }
+    &_hover {
+      transition: opacity 0.3s ease;
+      &:hover {
+        opacity: 0.5;
+        svg {
+          transform: translateX(5px);
+        }
+      }
+      svg {
+        transition: all 0.3s ease;
+      }
+    }
+  }
+  &__account-svg {
+    transition: all 0.3s ease;
+  }
+  &__link {
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+  }
+  &__login {
+    display: flex;
+    align-items: center;
+    color: $primary-40;
+  }
+  &__name {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: #000;
+  }
+  &__login-text {
+    margin-left: 10px;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  }
+  &__logout {
+    font-size: 1.4rem;
+    color: $red;
+    cursor: pointer;
+    width: 100%;
+    padding: 24px 0;
+    text-align: left;
+    border: none;
+    background-color: transparent;
+    transition: opacity 0.3s ease;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

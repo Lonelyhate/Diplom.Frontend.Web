@@ -1,0 +1,25 @@
+@import "../../../styles/variables.scss";
+
+.auth-login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title{
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    font-weight: 400;
+    margin-bottom: 4.8rem;
+  }
+  &__description{
+    text-align: center;
+    color: $primary-40;
+    font-size: 1.4rem;
+    margin-bottom: 4.8rem;
+  }
+  &__info{
+    text-align: center;
+    color: $primary-40;
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+}

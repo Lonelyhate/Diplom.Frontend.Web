@@ -1,0 +1,44 @@
+@import "../../styles/variables.scss";
+
+.button-main{
+  padding: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+.primary{
+  background-color: $primary;
+  color: $white;
+  transition: opacity 0.3s ease;
+  &:hover{
+    opacity: 0.8;
+  }
+  &.loading {
+    color: red;
+    background-color: $primary-30;
+  }
+}
+
+.gray {
+  background-color: $primary-5;
+  color: $mainTextColor;
+  transition: background-color 0.3s ease;
+  &:hover{
+    background-color: $primary-10;
+  }
+}
+
+.loading {
+  &:hover{
+    opacity: 1;
+    cursor: default;
+  }
+}
+
+.center{
+  margin: 0 auto;
+}

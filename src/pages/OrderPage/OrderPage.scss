@@ -1,0 +1,17 @@
+.order-page {
+    &__container{
+        display: flex;
+    }
+    &__content{
+        padding: 30px 0;
+        width: 540px;
+        margin: 0 auto;
+    }
+    &__title{
+        font-weight: 400;
+        text-align: left;
+        font-size: 1.8rem;
+        margin-bottom: 2.4rem;
+        line-height: 2.4rem;
+    }
+}

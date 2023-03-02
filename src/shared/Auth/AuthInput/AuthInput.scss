@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+.auth-input{
+  text-align: center;
+  font-size: 24px;
+  background-color: transparent;
+  &::placeholder{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: $primary-30;
+  }
+  &.error{
+    border: 1px solid $red;
+  }
+}

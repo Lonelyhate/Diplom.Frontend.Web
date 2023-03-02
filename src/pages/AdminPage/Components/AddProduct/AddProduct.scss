@@ -1,0 +1,80 @@
+@import "../../../../styles/variables.scss";
+
+.add-product {
+  position: relative;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+    z-index: 100;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #fff;
+    width: 400px;
+    height: 100%;
+    right: 0;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+    &.active {
+        transform: translateX(0);
+    }
+  }
+  &__subtitle{
+    margin-top: 15px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+  }
+  &__bottom{
+    display: flex;
+    margin-top: auto;
+  }
+}
+
+.label-img {
+    display: block;
+    margin-top: 15px;
+    &__text{
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+    &__input{
+        display: none;
+    }
+}
+
+.images {
+    margin-top: 10px;
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &:not(:last-child){
+            margin-bottom: 5px;
+        }
+    }
+    &__name{
+        font-size: 1.2rem;
+    }
+    &__delete {
+        padding: 0;
+        border: 0;
+        background-color: transparent;
+        cursor: pointer;
+    }
+}
