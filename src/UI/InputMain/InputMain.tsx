@@ -4,7 +4,7 @@ import { BsCheck } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 
 interface IInputMain {
-  labelText: string;
+  labelText?: string;
   placeholder: string;
   marginRight?: number;
   value?: string;
@@ -35,16 +35,16 @@ const InputMain: FC<IInputMain> = ({
 
   return (
     <div className='input-main' style={{ marginRight: marginRight, marginTop }}>
-      <label htmlFor='input-firstname' className='input-main__label'>
+      {labelText &&  <label htmlFor='input-firstname' className='input-main__label'>
         <p className='input-main__label-text'>{labelText}</p>
         {svgCheckCancel && value && (
-          <BsCheck
-            size={20}
-            color='rgb(5, 189, 5)'
-            className='input-main__check-svg'
-          />
+            <BsCheck
+                size={20}
+                color='rgb(5, 189, 5)'
+                className='input-main__check-svg'
+            />
         )}
-      </label>
+      </label>}
       <div className='input-main__input-field'>
         <input
           value={value}

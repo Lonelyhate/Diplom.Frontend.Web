@@ -1,0 +1,17 @@
+@import "../../../../styles/variables.scss";
+
+.admin-blog {
+  background-color: $background;
+  &__container {
+    display: flex;
+  }
+  &__content {
+    padding: 20px;
+    width: 100%;
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

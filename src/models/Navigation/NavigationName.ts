@@ -7,4 +7,5 @@ export class NavigationName {
     Favorites = "Избранное"
     Admin = "Админ-панель"
     AdminProduct = "Товар"
+    AdminBlog = "Блог"
 }

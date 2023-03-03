@@ -9,6 +9,7 @@ export const ACCOUNT_URL = HOME_URL + "account"
 export const ORDERS_URL = ACCOUNT_URL + "/orders"
 export const DISCOUNT_URL = ACCOUNT_URL + "/discount"
 export const ADMIN_PRODUCT_URL = ADMIN_URL + "/product"
+export const ADMIN_BLOG_URL = ADMIN_URL + "/blog"
 
 export class Urls {
     readonly Home: string = HOME_URL;
@@ -21,4 +22,5 @@ export class Urls {
     readonly Discount: string = DISCOUNT_URL;
     readonly Admin: string = ADMIN_URL;
     readonly AdminProduct: string = ADMIN_PRODUCT_URL;
+    readonly AdminBlog: string = ADMIN_BLOG_URL;
 }

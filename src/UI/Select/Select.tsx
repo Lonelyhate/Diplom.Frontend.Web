@@ -13,7 +13,7 @@ import cn from "classnames";
 
 type item = {
   name: string;
-  value?: string;
+  value?: string | number;
   id?: number;
 };
 
@@ -23,9 +23,10 @@ interface ISelect {
   items: item[];
   currentElement: any
   setCurrentElement: (element: any) => void
+  addNewElement?: boolean
 }
 
-const Select: FC<ISelect> = ({ placeholder, height = 44, items, currentElement, setCurrentElement }) => {
+const Select: FC<ISelect> = ({ placeholder, height = 44, items, currentElement, setCurrentElement, addNewElement = false }) => {
   const [active, setActive] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [elements, setElements] = useState<item[]>(items);
@@ -121,9 +122,11 @@ const Select: FC<ISelect> = ({ placeholder, height = 44, items, currentElement, 
             <MdClear size={25} />
           </button>
         )}
-        <button className='select__add'>
-          <AiOutlinePlus size={25} />
-        </button>
+        {addNewElement &&
+            <button className='select__add'>
+              <AiOutlinePlus size={25} />
+            </button>
+        }
         <button onClick={onClickOpenList} className='select__open'>
           <HiOutlineChevronDown size={25} />
         </button>

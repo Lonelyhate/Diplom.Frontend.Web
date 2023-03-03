@@ -1,14 +1,13 @@
 @import "../../../../styles/variables.scss";
 
 .admin-product {
-    padding: 20px 0;
     background-color: $background;
     &__container{
         display: flex;
     }
     &__content {
+        padding: 20px;
         width: 100%;
-        padding: 0 20px;
     }
     &__header{
         display: flex;

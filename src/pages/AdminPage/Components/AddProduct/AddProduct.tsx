@@ -18,6 +18,7 @@ import { IProductCreateRequestModel } from "../../../../models/API/ProductApi/Pr
 import axios from "axios";
 import ProductApi from "../../../../models/API/ProductApi/ProductApi";
 import { fetchProductCreate } from "../../../../store/reducers/Product/Creators/ProductCreator";
+import Gender, {GenderValue} from "../../../../models/Gender";
 
 interface IAddProduct {
   visable: boolean;
@@ -42,6 +43,7 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
   const [descr, setDescr] = useState<string>("");
   const [images, setImages] = useState<File[]>([]);
   const [sizes, setSizes] = useState<any>([]);
+  const [gender, setGender] = useState<GenderValue | null>(null);
   const contentRef = useRef(null);
 
   useEffect(() => {
@@ -117,6 +119,15 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
             items={brands}
             currentElement={brand}
             setCurrentElement={setBrand}
+          />
+        </div>
+        <h4 className='add-product__subtitle'>Пол</h4>
+        <div className='add-product__select'>
+          <Select
+              placeholder='Выберите пол'
+              items={Gender.Array}
+              currentElement={gender}
+              setCurrentElement={setGender}
           />
         </div>
         <h4 className='add-product__subtitle'>Категория</h4>
