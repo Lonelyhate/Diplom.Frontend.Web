@@ -1,3 +1,5 @@
+@import "../../../../styles/variables.scss";
+
 .add-blog {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
@@ -16,6 +18,8 @@
   }
   &__content {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 400px;
     height: 100%;
     background-color: white;
@@ -39,5 +43,45 @@
   }
   &__list {
     margin-bottom: 15px;
+  }
+  &__paragraph {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+    .add-blog__cancel{
+      transform: translateY(0px)
+    }
+    &:not(:last-child)
+    {
+      margin-bottom: 10px;
+    }
+  }
+  &__text {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    border-bottom: 1px solid $primary-40;
+  }
+  &__img {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__img-name {
+    font-size: 1.3rem;
+  }
+  &__cancel {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgb(184, 8, 8);
+    transform: translateY(5px);
+  }
+
+  &__bottom {
+    display: flex;
+    margin-top: auto;
   }
 }

@@ -1,0 +1,32 @@
+@import "../../../../styles/variables.scss";
+
+.admin-blog-item {
+    display: block;
+    width: 254px;
+    height: 240px;
+    text-decoration: none;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid $primary-10;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var($primary-10);
+    &__img {
+        display: block;
+        width: 100%;
+        height: 140px;
+        transition: opacity 0.3s ease;
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+    &__text {
+        padding: 1.4rem;
+    }
+    &__title {
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.8rem;
+        margin-bottom: 1rem;
+    }
+}

@@ -1,0 +1,7 @@
+.blog-list {
+    padding-top: 5rem;
+    &__list{
+        display: flex;
+        justify-content: space-between;
+    }
+}
