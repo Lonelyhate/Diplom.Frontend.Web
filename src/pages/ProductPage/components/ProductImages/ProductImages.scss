@@ -1,0 +1,49 @@
+@import "../../../../styles/variables.scss";
+
+.product-images {
+  &__img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 681px;
+  }
+  &__slider {
+    height: 100%;
+    max-width: 777px;
+    flex: 1 1 75.3rem;
+    margin-right: 20px;
+    display: flex;
+    .swiper {
+      padding: 0;
+      margin-left: 24px;
+      &-pagination {
+        &-bullet {
+          display: block;
+          height: 48px;
+          width: 48px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          cursor: pointer;
+          &:not(:last-child) {
+            margin-bottom: 20px;
+          }
+          &-active{
+            position: relative;
+            &:after {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              bottom: 0;
+              right: 0;
+              pointer-events: none;
+              z-index: 2;
+              background-color: $primary-10;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -44,3 +44,18 @@ export const fetchProductNewGet = () => async (dispatch: AppDispatch) => {
   }
   dispatch(productNewSlice.actions.productNewGet(response.data!));
 };
+
+export const fetchProductById = (id: string) => async (dispatch: AppDispatch) => {
+  let response;
+  try {
+    dispatch(productSlice.actions.productLoading())
+    response = await ProductApi.GetProductById(id);
+    if (!response.isSuccess) {
+      dispatch(productSlice.actions.productError(response.displayMessage!));
+      return;
+    }
+    dispatch(productSlice.actions.productGetById(response.data!))
+  } catch(e) {
+    dispatch(productSlice.actions.productError("Product by id error"))
+  }
+}

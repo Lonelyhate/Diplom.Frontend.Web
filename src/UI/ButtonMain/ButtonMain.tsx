@@ -4,10 +4,10 @@ import cn from "classnames";
 import Spinner from "../Spinner/Spinner";
 
 interface IButtonMain {
-  text: string | JSX.Element | number;
+  text: string | JSX.Element | number | string[];
   backGround?: "primary" | "gray";
   width?: string | number;
-  height?: string;
+  height?: string | number;
   maringBottom?: string;
   onClick: () => void;
   isLoading?: boolean;
@@ -19,6 +19,7 @@ interface IButtonMain {
   marginRight?: number;
   ref?: any;
   id?: string;
+  fontSize?: number | string
 }
 
 const ButtonMain: FC<IButtonMain> = ({
@@ -36,7 +37,8 @@ const ButtonMain: FC<IButtonMain> = ({
   location,
   marginRight,
   ref,
-  id
+  id,
+    fontSize
 }) => {
   const isDisabled = (): boolean => {
     if (isLoading || disabled) {
@@ -56,7 +58,8 @@ const ButtonMain: FC<IButtonMain> = ({
         height: height,
         marginBottom: maringBottom,
         marginTop: marginTop,
-        marginRight
+        marginRight,
+        fontSize
       }}
       className={cn("button-main", {
         primary: backGround == "primary",
@@ -68,7 +71,7 @@ const ButtonMain: FC<IButtonMain> = ({
       {isLoading ? (
         <Spinner color={"#000"} size={sizeSpinner} widthBorder={widthBorder} />
       ) : (
-        text
+          Array.isArray(text) ? text.map(item => <span key={item} >{item}</span>) : <span>{text}</span>
       )}
     </button>
   );

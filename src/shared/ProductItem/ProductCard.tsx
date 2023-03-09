@@ -5,6 +5,7 @@ import { useFirstImage } from "../../hooks/images";
 import { IProduct } from "../../models/Product/Product";
 import { IoIosStar } from "react-icons/io";
 import { FiSearch } from "react-icons/fi";
+import {PRODUCT_PAGE_URL} from "../../models/urls";
 
 interface IProductItem {
   product: IProduct;
@@ -13,7 +14,7 @@ interface IProductItem {
 const ProductItem: FC<IProductItem> = ({ product }) => {
   return (
     <div className='product-card'>
-      <Link to={product.id.toString()} className='product-card__link'>
+      <Link to={`${PRODUCT_PAGE_URL}/${product.id.toString()}`} className='product-card__link'>
         <img
           src={useFirstImage(product.images)}
           alt=''

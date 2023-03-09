@@ -9,6 +9,10 @@
   border-radius: 0.4rem;
   cursor: pointer;
   font-size: 1.4rem;
+  flex-direction: column;
+  span:not(:last-child) {
+    margin-bottom: 4px;
+  }
 }
 .primary{
   background-color: $primary;

@@ -7,6 +7,7 @@ export const LOYALTY_URL = HOME_URL + "loyalty";
 export const CONTACT_URL = HOME_URL + "contact";
 export const MAGAZINE_URL = HOME_URL + "magazine";
 export const BLOG_URL = HOME_URL + "news"
+export const PRODUCT_PAGE_URL = HOME_URL + "product"
 
 export const FAQ_URL = HOME_URL + "faq";
 export const SHIPPING_FAQ_URL = FAQ_URL + "/shipping_faq";

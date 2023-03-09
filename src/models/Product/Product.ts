@@ -9,7 +9,8 @@ export interface IProduct {
     images: string,
     dateCreation: string,
     categoryid: number,
-    category: Category
+    codeProduct: number,
+    category: Category,
     brandid: number,
     brand: Brand,
 }

@@ -7,15 +7,16 @@ import AdminProduct from "./pages/AdminPage/Components/AdminProduct/AdminProduct
 import AdminBlog from "./pages/AdminPage/Components/AdminBlog/AdminBlog";
 import { Route, Routes } from "react-router-dom";
 import {
-  ACCOUNT_URL,
-  ADMIN_BLOG_URL,
-  ADMIN_PRODUCT_URL,
-  ADMIN_URL,
-  DISCOUNT_URL,
-  HOME_URL,
-  ORDERS_URL
+    ACCOUNT_URL,
+    ADMIN_BLOG_URL,
+    ADMIN_PRODUCT_URL,
+    ADMIN_URL,
+    DISCOUNT_URL,
+    HOME_URL,
+    ORDERS_URL, PRODUCT_PAGE_URL
 } from "./models/urls";
 import HomePage from "./pages/HomePage/HomePage";
+import ProductPage from "./pages/ProductPage/ProductPage";
 
 const RoutesComponent: FC = () => {
   return (
@@ -27,6 +28,7 @@ const RoutesComponent: FC = () => {
       <Route path={ADMIN_URL} element={<AdminPage />} />
       <Route path={ADMIN_PRODUCT_URL} element={<AdminProduct />} />
       <Route path={ADMIN_BLOG_URL} element={<AdminBlog />} />
+        <Route path={`${PRODUCT_PAGE_URL}/:id`} element={<ProductPage/>} />
     </Routes>
   );
 };

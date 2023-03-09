@@ -32,37 +32,39 @@
   &__left {
     right: calc(50% + 100px);
   }
+
+  .swiper {
+    padding-bottom: 50px !important;
+    &-button {
+      &-disabled {
+        border-color: $primary-40;
+        color: $primary-40;
+        cursor: default;
+      }
+    }
+    &-pagination {
+      position: absolute;
+      bottom: 13px;
+      right: 50%;
+      transform: translateX(50%);
+      display: flex;
+      &-bullet {
+        display: block;
+        width: 6px;
+        height: 6px;
+        background-color: $primary-40;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+        &:not(:last-child) {
+          margin-right: 16px;
+        }
+        &-active {
+          background-color: #000;
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
 }
 
-.swiper {
-  padding-bottom: 50px !important;
-  &-button {
-    &-disabled {
-      border-color: $primary-40;
-      color: $primary-40;
-      cursor: default;
-    }
-  }
-  &-pagination {
-    position: absolute;
-    bottom: 13px;
-    right: 50%;
-    transform: translateX(50%);
-    display: flex;
-    &-bullet {
-      display: block;
-      width: 6px;
-      height: 6px;
-      background-color: $primary-40;
-      border-radius: 50%;
-      transition: transform 0.3s ease;
-      &:not(:last-child) {
-        margin-right: 16px;
-      }
-      &-active {
-        background-color: #000;
-        transform: scale(1.1);
-      }
-    }
-  }
-}
+

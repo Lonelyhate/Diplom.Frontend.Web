@@ -1,0 +1,85 @@
+@import "../../../../styles/variables.scss";
+
+.product-info {
+  width: 35.1rem;
+  padding: 3.2rem;
+  height: max-content;
+  border-radius: 0.4rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  &__brand {
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+  }
+  &__name {
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: $primary-40;
+    margin-bottom: 2.4rem;
+    font-weight: 400;
+  }
+  &__available-siezes {
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    margin-bottom: 1.6rem;
+  }
+  &__sizes {
+    display: grid;
+    grid-gap: 0.4rem;
+    margin-bottom: 2.4rem;
+    grid-template-columns: repeat(auto-fit, minmax(6.8rem, max-content));
+  }
+  &__price {
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 2.8rem;
+    text-align: center;
+    border-top: 1px solid $primary-5;
+    margin-bottom: 1.2rem;
+    padding-top: 1.2rem;
+  }
+}
+
+.bottom-info {
+  &__item {
+    border-top: 1px solid $primary-5;
+    &:last-child {
+      border-bottom: 1px solid $primary-5;
+    }
+  }
+  &__top {
+    display: block;
+    color: $primary-40;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    padding-top: 0.8rem;
+  }
+  &__bot {
+    display: block;
+    padding-bottom: 0.8rem;
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+  &__btn {
+    background-color: transparent;
+    font-size: 1.4rem;
+    border: none;
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    align-items: center;
+    padding: 2.2rem 0;
+    justify-content: space-between;
+    transition: color 0.3s ease;
+    &:hover {
+      color: $primary-40;
+    }
+  }
+}
+

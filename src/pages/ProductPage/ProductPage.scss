@@ -1,0 +1,10 @@
+@import "../../styles/variables.scss";
+
+.product-page{
+  padding-top: 30px;
+  background-color: $background;
+  &__content{
+    display: flex;
+    justify-content: space-between;
+  }
+}

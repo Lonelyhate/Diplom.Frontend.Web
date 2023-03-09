@@ -1,11 +1,10 @@
 import axios from "axios";
 import ApiType from "../ApiType";
 import BaseAPI from "../BaseAPI";
-import { IProductCreateRequestModel } from "./ProductCreateRequestModel";
-import converter from "javascript-binary-converter";
-import { IBaseResponse } from "../BaseResponse";
-import { IProduct } from "../../Product/Product";
-import { IAxiosError } from "../../AxiosError";
+import {IProductCreateRequestModel} from "./ProductCreateRequestModel";
+import {IBaseResponse} from "../BaseResponse";
+import {IProduct} from "../../Product/Product";
+import {IAxiosError} from "../../AxiosError";
 
 class ProductApi extends BaseAPI {
   BaseUrl = "https://localhost:7081/api/Product/";
@@ -50,6 +49,13 @@ class ProductApi extends BaseAPI {
     } catch (e) {
       return (e as IAxiosError<IProduct>).response.data;
     }
+  }
+
+  public async GetProductById(id: string) {
+    return await this.SendAsync<IProduct>({
+      ApiType: ApiType.GET,
+      Url: `get/${id}`
+    })
   }
 }
 

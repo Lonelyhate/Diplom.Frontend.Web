@@ -3,12 +3,14 @@ import { IProduct } from "../../../../models/Product/Product";
 
 interface ProductState {
     products: IProduct[];
+    product: IProduct | null
     isLoading: boolean;
     error: string;
 }
 
 const initialState: ProductState = {
     products: [],
+    product: null,
     error: "",
     isLoading: false
 }
@@ -33,6 +35,11 @@ export const productSlice = createSlice({
             state.error = "";
             state.products = action.payload;
             state.isLoading = false
+        },
+        productGetById(state, action: PayloadAction<IProduct>) {
+            state.product = action.payload;
+            state.error = "";
+            state.isLoading = false;
         }
     }
 })
