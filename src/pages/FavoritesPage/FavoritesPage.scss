@@ -1,0 +1,18 @@
+.favorites-page {
+    background-color: #fff;
+    padding: 3rem 0 7rem;
+    height: 100%;
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 24.9%));
+        grid-auto-flow: row;
+        justify-items: center;
+        gap: 10px 0px;
+    }
+    &__nocontent {
+        padding: 100px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

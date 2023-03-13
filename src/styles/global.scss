@@ -10,7 +10,6 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1;
@@ -52,9 +51,16 @@ dd {
   margin: 0;
 }
 .App{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
   &__main{
     padding-top: 75px;
   }
+}
+.footer {
+  margin-top: auto;
 }
 .container{
   max-width: 1200px;

@@ -7,6 +7,7 @@
     display: flex;
   }
   &__link{
+    position: relative;
     width: 5rem;
     height: 5rem;
     color: $mainTextColor;
@@ -14,6 +15,7 @@
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
+    text-decoration: none;
     &:hover{
       background-color: $grayLight;
     }
@@ -58,5 +60,18 @@
       pointer-events: all;
       transform: translateY(0);
     }
+  }
+  &__favorites-span {
+    background-color: $background;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
   }
 }

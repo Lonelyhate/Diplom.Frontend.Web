@@ -6,7 +6,7 @@ import ProfileLinks from "./ProfileLinks/ProfileLinks";
 
 const Header = () => {
     return (
-        <div className="header">
+        <header className="header">
             <div className="header__container container">
                 <div className="header__left">
                     <Logo marginRight={18} />
@@ -14,7 +14,7 @@ const Header = () => {
                 </div>
                 <ProfileLinks/>
             </div>
-        </div>
+        </header>
     );
 };
 

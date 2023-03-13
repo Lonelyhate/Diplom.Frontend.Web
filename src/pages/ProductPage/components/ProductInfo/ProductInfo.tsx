@@ -1,26 +1,35 @@
-import React, { FC, useState } from "react";
-import "./ProductInfo.scss";
-import { IProduct } from "../../../../models/Product/Product";
-import ButtonMain from "../../../../UI/ButtonMain/ButtonMain";
-import { IoStarSharp } from "react-icons/io5";
-import { BiPlus } from "react-icons/bi";
-import Modal from "../../../../UI/Modal/Modal";
-import SizesTable from "../SizesTable/SizesTable";
-import cn from "classnames";
-import DeliveryInfo from "../DeliveryInfo/DeliveryInfo";
-import ReturnInfo from "../ReturnInfo/ReturnInfo";
+import React, { FC, useState } from 'react';
+import './ProductInfo.scss';
+import { IProduct } from '../../../../models/Product/Product';
+import ButtonMain from '../../../../UI/ButtonMain/ButtonMain';
+import { IoStarSharp } from 'react-icons/io5';
+import { BiPlus } from 'react-icons/bi';
+import Modal from '../../../../UI/Modal/Modal';
+import SizesTable from '../SizesTable/SizesTable';
+import cn from 'classnames';
+import DeliveryInfo from '../DeliveryInfo/DeliveryInfo';
+import ReturnInfo from '../ReturnInfo/ReturnInfo';
 
 interface IProductInfo {
     product: IProduct;
+    isFavorites: boolean;
+    addToFavorites: () => void;
+    deleteFromFavorites: () => void;
 }
 
-const ProductInfo: FC<IProductInfo> = ({ product }) => {
-    const sizes = product.sizes.split(";");
+const ProductInfo: FC<IProductInfo> = ({
+    product,
+    isFavorites,
+    addToFavorites,
+    deleteFromFavorites
+}) => {
+    const sizes = product.sizes.split(';');
     const [activeSize, setActiveSeize] = useState<string>(sizes[0]);
     const [activeModalSize, setActiveModalSize] = useState<boolean>(false);
     const [activeDescr, setActiveDescr] = useState<boolean>(false);
     const [activeDelivery, setActiveDelivery] = useState<boolean>(false);
     const [returnActive, setReturnActive] = useState<boolean>(false);
+
     return (
         <div className='product-info'>
             <h2 className='product-info__brand'>{product.brand.name}</h2>
@@ -31,14 +40,14 @@ const ProductInfo: FC<IProductInfo> = ({ product }) => {
                 Доступные размеры
             </span>
             <ul className='product-info__sizes'>
-                {sizes.map((item) => (
+                {sizes.map(item => (
                     <li key={item} className='product-info__item'>
                         <ButtonMain
                             fontSize={12}
                             width={68}
                             height={32}
-                            backGround={activeSize == item ? "primary" : "gray"}
-                            text={item + " EU"}
+                            backGround={activeSize == item ? 'primary' : 'gray'}
+                            text={item + ' EU'}
                             onClick={() => {
                                 setActiveSeize(item);
                             }}
@@ -50,23 +59,23 @@ const ProductInfo: FC<IProductInfo> = ({ product }) => {
                 {product.price.toLocaleString()} ₽
             </div>
             <ButtonMain
-                maringBottom={"24px"}
+                maringBottom={'24px'}
                 height={56}
-                text={["Добавить в корзину", activeSize + " EU"]}
+                text={['Добавить в корзину', activeSize + ' EU']}
                 onClick={() => {}}
             />
             <ButtonMain
-                maringBottom={"1px"}
+                maringBottom={'1px'}
                 height={56}
-                backGround={"gray"}
-                text={"Заказ в один клик"}
+                backGround={'gray'}
+                text={'Заказ в один клик'}
                 onClick={() => {}}
             />
             <ButtonMain
-                maringBottom={"24px"}
+                maringBottom={'24px'}
                 height={56}
-                backGround={"gray"}
-                text={"Заказ по телефону"}
+                backGround={'gray'}
+                text={'Заказ по телефону'}
                 onClick={() => {}}
             />
             <ul className='product-info__bottom-info bottom-info'>
@@ -89,13 +98,21 @@ const ProductInfo: FC<IProductInfo> = ({ product }) => {
                     </button>
                 </li>
                 <li className='bottom-info__item'>
-                    <button className='bottom-info__btn'>
-                        В избранное{" "}
-                        <IoStarSharp color='rgba(0, 0, 0, 0.4)' size={25} />
+                    <button
+                        onClick={
+                            isFavorites ? deleteFromFavorites : addToFavorites
+                        }
+                        className='bottom-info__btn'
+                    >
+                        В избранное{' '}
+                        <IoStarSharp
+                            color={isFavorites ? '#000' : 'rgba(0, 0, 0, 0.4)'}
+                            size={25}
+                        />
                     </button>
                 </li>
                 <li
-                    className={cn("bottom-info__item", {
+                    className={cn('bottom-info__item', {
                         activeDescr: activeDescr
                     })}
                 >
@@ -103,7 +120,7 @@ const ProductInfo: FC<IProductInfo> = ({ product }) => {
                         onClick={() => {
                             setActiveDescr(!activeDescr);
                         }}
-                        className={cn("bottom-info__btn bottom-info__descr", {
+                        className={cn('bottom-info__btn bottom-info__descr', {
                             active: activeDescr
                         })}
                     >
@@ -136,14 +153,14 @@ const ProductInfo: FC<IProductInfo> = ({ product }) => {
             </ul>
             <ButtonMain
                 height={48}
-                backGround={"gray"}
-                text={"Больше от " + product.brand.name}
+                backGround={'gray'}
+                text={'Больше от ' + product.brand.name}
                 onClick={() => {}}
             />
             <Modal
-                minHeight={"auto"}
-                maxWidth={"100%"}
-                padding={"2rem"}
+                minHeight={'auto'}
+                maxWidth={'100%'}
+                padding={'2rem'}
                 visable={activeModalSize}
                 setVisable={setActiveModalSize}
                 borderRadius='0.4rem'
@@ -151,8 +168,8 @@ const ProductInfo: FC<IProductInfo> = ({ product }) => {
                 <SizesTable closeVisable={setActiveModalSize} />
             </Modal>
             <Modal
-                minHeight={"auto"}
-                maxWidth={"100%"}
+                minHeight={'auto'}
+                maxWidth={'100%'}
                 padding='2rem'
                 setVisable={setActiveDelivery}
                 visable={activeDelivery}
@@ -161,8 +178,8 @@ const ProductInfo: FC<IProductInfo> = ({ product }) => {
                 <DeliveryInfo closeModal={setActiveDelivery} />
             </Modal>
             <Modal
-                minHeight={"auto"}
-                maxWidth={"100%"}
+                minHeight={'auto'}
+                maxWidth={'100%'}
                 padding='2rem'
                 setVisable={setReturnActive}
                 visable={returnActive}

@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .product-card {
     position: relative;
@@ -9,9 +9,11 @@
     max-height: 100%;
     padding: 3.6rem 0.8rem 2.4rem;
     width: 264px;
-    
-    &:hover{
+    overflow: hidden;
+    &:hover {
         border-radius: 4px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
         .product-card__overlay {
             background-color: $primary-5;
             border-radius: 0.4rem;
@@ -19,13 +21,20 @@
         .product-card__btn {
             color: $primary-40;
         }
+        .card-sizes {
+            transform: translateY(0);
+        }
+        .product-card__btn-star {
+            &.favorites {
+                color: #000;
+            }
+        }
     }
-    &__link{
+    &__link {
         text-decoration: none;
-        
         z-index: 2;
     }
-    &__overlay{
+    &__overlay {
         z-index: 3;
         position: absolute;
         display: block;
@@ -37,7 +46,7 @@
         background-color: transparent;
         transition: background-color 0.3s ease, border-radius 0.3s ease;
     }
-    &__img{
+    &__img {
         display: block;
         width: 100%;
         margin-bottom: 1.8rem;
@@ -56,13 +65,13 @@
         font-size: 1.2rem;
         line-height: 1.6rem;
     }
-    &__price{
+    &__price {
         text-align: center;
         color: #000;
         margin-top: 2.5rem;
         font-size: 1.4rem;
     }
-    &__buttons{
+    &__buttons {
         position: absolute;
         top: 1.6rem;
         right: 1.6rem;
@@ -70,7 +79,7 @@
         flex-direction: column;
         z-index: 4;
     }
-    &__btn{
+    &__btn {
         position: relative;
         z-index: 5;
         background-color: transparent;
@@ -80,7 +89,7 @@
         color: $background;
         transition: color 0.3s ease;
     }
-    &__btn-star{
+    &__btn-star {
         margin-bottom: 0.8rem;
         svg {
             transition: fill 0.3s ease;
@@ -100,5 +109,33 @@
                 stroke: #000;
             }
         }
+    }
+}
+
+.card-sizes {
+    width: 264px;
+    background-color: $product-card-bg;
+    position: absolute;
+    z-index: 5;
+    bottom: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+    transform: translateY(100%);
+    &__text {
+        padding: 1rem 2.5rem;
+        padding-top: 0;
+        background-color: $primary-5;
+        font-size: 1.2rem;
+        text-align: center;
+        color: $primary-40;
+        line-height: 2rem;
+    }
+    &__title{
+        background-color: $primary-5;
+        text-align: center;
+        padding-bottom: 1rem;
+        font-weight: 400;
+        font-size: 1.1rem;
+        padding-top: 0.5rem;
     }
 }
