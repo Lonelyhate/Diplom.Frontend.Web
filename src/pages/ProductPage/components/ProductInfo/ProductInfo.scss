@@ -52,6 +52,12 @@
     &:last-child {
       border-bottom: 1px solid $primary-5;
     }
+    &.activeDescr {
+      .bottom-info__descr-text {
+        padding-bottom: 22px;
+        max-height: 300px;
+      }
+    }
   }
   &__top {
     display: block;
@@ -80,6 +86,43 @@
     &:hover {
       color: $primary-40;
     }
+  }
+  &__descr {
+    span {
+      position: relative;
+      display: block;
+      height: 2px;
+      width: 16px;
+      background-color: $primary-40;
+      transform: translateX(-5px);
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 2px;
+        height: 16px;
+        background-color: $primary-40;
+        top: 50%;
+        left: 7px;
+        transform: translateY(-50%);
+        transition: all 0.3s ease;
+      }
+    }
+    &.active {
+      span {
+        &::after {
+          top: -7px;
+          transform: rotate(-90deg);
+        }
+      }
+    }
+  }
+  &__descr-text {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
   }
 }
 

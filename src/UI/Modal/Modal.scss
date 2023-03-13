@@ -1,0 +1,33 @@
+.modal {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    &.active {
+        visibility: visible;
+        pointer-events: all;
+        opacity: 1;
+    }
+    &__content {
+        position: absolute;
+        background-color: #fff;
+        transition: bottom 0.3s ease;
+        &.down {
+            bottom: -100%;
+            right: 50%;
+            transform: translate(50%, 50%);
+        }
+        &.active {
+            bottom: 50%;
+            right: 50%;
+            transform: translate(50%, 50%);
+        }
+    }
+}

@@ -1,0 +1,75 @@
+@import "../../../../styles/variables.scss";
+
+.sizes-table {
+    &__header {
+        display: flex;
+        margin-bottom: 2rem;
+        justify-content: center;
+        align-items: center;
+    }
+    &__title {
+        text-align: center;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        font-weight: 400;
+        margin-left: auto;
+    }
+    &__cancel {
+        margin-left: auto;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    &__content {
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.2rem;
+    }
+    &__table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    &__tbody {
+        border: 1px solid $primary-10;
+        border-radius: 0.4rem;
+        display: block;
+        tr {
+            &:first-child {
+                td {
+                    border-top: 1px solid transparent;
+                }
+            }
+            &:last-child {
+                td {
+                    border-bottom: 1px solid transparent;
+                }
+            }
+        }
+        td {
+            padding: 0.55rem 1.85rem;
+            line-height: 2rem;
+            text-align: center;
+            color: $primary-40;
+            border: 1px solid $primary-10;
+            &:first-child {
+                border-left: 1px solid transparent;
+                span {
+                    font-weight: 600;
+                }
+            }
+            &:last-child {
+                border-right: 1px solid transparent;
+            }
+        }
+    }
+    &__td-header {
+        b {
+            font-weight: 600;
+            color: #000;
+        }
+    }
+}
