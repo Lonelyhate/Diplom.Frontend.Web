@@ -6,14 +6,17 @@ import Auth from '../../Auth/Auth';
 import cn from 'classnames';
 import { useAppSelector } from '../../../hooks/redux';
 import ProfilePopup from '../ProfilePopup/ProfilePopup';
-
+import CartPopup from '../CartPopup/CartPopup';
 
 const ProfileLinks: FC = () => {
     const { isAuth } = useAppSelector(state => state.userReducer);
     const { favorites } = useAppSelector(state => state.favortiesReducer);
     const [isActiveProfile, setIsActiveProfile] = useState(false);
+    const [isActiveCart, setIsActiveCart] = useState(false);
     const profileRef = useRef<HTMLDivElement>(null);
-    const profileButtonRef = useRef<HTMLButtonElement>(null);
+    const profileBtnRef = useRef(null)
+    const cartRef = useRef<HTMLDivElement>(null);
+    const cartBtnRef = useRef(null);
 
     const openProfile = (): void => {
         setIsActiveProfile(!isActiveProfile);
@@ -21,8 +24,9 @@ const ProfileLinks: FC = () => {
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (!event.composedPath().includes(profileRef.current!)) {
-                setIsActiveProfile(false)
+            console.log(event.composedPath())
+            if (!event.composedPath().includes(profileRef.current!) && !event.composedPath().includes(profileBtnRef.current!) ) {
+                setIsActiveProfile(false);
             }
         };
 
@@ -33,7 +37,7 @@ const ProfileLinks: FC = () => {
     }, []);
 
     return (
-        <div ref={profileRef} className='profile-links'>
+        <div className='profile-links'>
             <ul className='profile-links__list'>
                 <li className='profile-links__item'>
                     <Link
@@ -54,12 +58,18 @@ const ProfileLinks: FC = () => {
                     </button>
                 </li>
                 <li className='profile-links__item'>
-                    <button className='profile-links__button'>
+                    <button
+                        onClick={() => {
+                            setIsActiveCart(!isActiveCart);
+                        }}
+                        className='profile-links__button'
+                    >
                         <ProfileNavigation.Cart.img size={24} />
                     </button>
                 </li>
                 <li className='profile-links__item '>
                     <button
+                        ref={profileBtnRef}
                         onClick={openProfile}
                         className='profile-links__button profile-links__button_profile'
                     >
@@ -68,6 +78,14 @@ const ProfileLinks: FC = () => {
                 </li>
             </ul>
             <div
+                className={cn('profile-links__cart', {
+                    active: isActiveCart
+                })}
+            >
+                <CartPopup />
+            </div>
+            <div
+                ref={profileRef}
                 className={cn('profile-links__profile', {
                     active: isActiveProfile
                 })}

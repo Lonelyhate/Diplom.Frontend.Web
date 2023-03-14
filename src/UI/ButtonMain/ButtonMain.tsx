@@ -16,7 +16,7 @@ interface IButtonMain {
   marginTop?: string;
   disabled?: boolean;
   location?: "center";
-  marginRight?: number;
+  marginRight?: number | string;
   ref?: any;
   id?: string;
   fontSize?: number | string

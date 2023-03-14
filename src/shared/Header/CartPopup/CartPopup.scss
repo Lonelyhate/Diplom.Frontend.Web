@@ -1,0 +1,12 @@
+@import "../../../styles/variables.scss";
+
+.cart-popup {
+    &__empty {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        text-align: center;
+        color: $primary-40;
+        max-width: 312px;
+        margin: 4rem 0;
+    }
+}

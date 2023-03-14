@@ -1,0 +1,38 @@
+@import "../../../styles/variables.scss";
+
+.content-info {
+    margin-left: 2.4rem;
+    max-width: 320px;
+    width: 320px;
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    &__size-name {
+        text-align: center;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        font-weight: 400;
+        margin-bottom: 1.6rem;
+    }
+    &__sizes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(6.8rem, max-content));
+        gap: 0.4rem;
+        justify-content: center;
+    }
+    &__bottom {
+        margin-top: auto;
+        border-top: 1px solid $primary-5;
+    }
+    &__price {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 400;
+        padding-top: 1.2rem;
+        line-height: 2.8rem;
+        margin-bottom: 1.2rem;
+    }
+    &__btns {
+        display: flex;
+    }
+}

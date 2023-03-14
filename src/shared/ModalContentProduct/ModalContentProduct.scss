@@ -1,0 +1,36 @@
+@import "../../styles/variables.scss";
+
+.modal-product {
+    padding: 1.5rem 2.4rem;
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    &__brand {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        font-weight: 400;
+        text-align: center;
+    }
+    &__name {
+        text-align: center;
+        color: $primary-40;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+        font-weight: 400;
+    }
+    &__close{
+        padding: 0;
+        border: 0;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(3px);
+    }
+    &__content {
+        display: flex;
+    }
+}

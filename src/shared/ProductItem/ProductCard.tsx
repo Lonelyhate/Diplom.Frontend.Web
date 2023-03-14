@@ -6,15 +6,16 @@ import { IProduct } from '../../models/Product/Product';
 import { IoIosStar } from 'react-icons/io';
 import { FiSearch } from 'react-icons/fi';
 import { PRODUCT_PAGE_URL } from '../../models/urls';
-import ButtonMain from '../../UI/ButtonMain/ButtonMain';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import cn from 'classnames';
-import FavoritesApi from '../../models/API/ProductApi/FavoritesApi';
 import {
     fetchFavoritesAdd,
     fetchFavoritesDelete
 } from '../../store/reducers/Product/Creators/FavoritesCreator';
-import Modal from '../../UI/Modal/Modal';
+import {
+    setModalProductVisable,
+    setProductForModal
+} from '../../store/reducers/Product/Creators/ProductCreator';
 
 interface IProductItem {
     product: IProduct;
@@ -23,11 +24,19 @@ interface IProductItem {
 
 const ProductItem: FC<IProductItem> = ({ product, sizeVisable = false }) => {
     const { favorites } = useAppSelector(state => state.favortiesReducer);
+    const { currentProductForModal, visableModalProduct } = useAppSelector(
+        state => state.productReducer
+    );
     const dispatch = useAppDispatch();
     const [isFavorties, setIsFavorites] = useState<boolean>(
         favorites.some(f => f.id == product.id)
     );
     const sizes: string[] = product.sizes.split(';');
+
+    const setVisableModal = () => {
+        dispatch(setProductForModal(product));
+        dispatch(setModalProductVisable(true));
+    };
 
     const sendToFavorites = async () => {
         dispatch(fetchFavoritesAdd(product.id));
@@ -75,7 +84,10 @@ const ProductItem: FC<IProductItem> = ({ product, sizeVisable = false }) => {
                 >
                     <IoIosStar size={24} />
                 </button>
-                <button className='product-card__btn product-card__btn-search'>
+                <button
+                    onClick={setVisableModal}
+                    className='product-card__btn product-card__btn-search'
+                >
                     <FiSearch size={23} />
                 </button>
             </div>
