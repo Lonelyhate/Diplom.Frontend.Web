@@ -36,10 +36,10 @@ const SizesTable: FC<ISizesTable> = ({closeVisable}) => {
                                 <b>JS</b>
                             </td>
                         </tr>
-                        {sizes.map((item) => (
-                            <tr className='sizes-table__tr-content'>
-                                {Object.keys(item).map((sz) => (
-                                    <td className='sizes-table__td-content'>
+                        {sizes.map((item, index: number) => (
+                            <tr key={index} className='sizes-table__tr-content'>
+                                {Object.keys(item).map((sz, index: number) => (
+                                    <td key={index} className='sizes-table__td-content'>
                                         <span>{(item as any)[sz]}</span>
                                     </td>
                                 ))}

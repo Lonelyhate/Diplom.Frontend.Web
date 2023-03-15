@@ -28,6 +28,11 @@ export const cartSlice = createSlice({
             state.cart = action.payload;
             state.error = '';
             state.isLoading = false;
+        },
+        cartAddProduct(state, action: PayloadAction<ICart>) {
+            state.cart = action.payload;
+            state.error = "";
+            state.isLoading = false;
         }
     }
 });

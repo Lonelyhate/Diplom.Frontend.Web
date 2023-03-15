@@ -9,6 +9,9 @@ import SizesTable from '../SizesTable/SizesTable';
 import cn from 'classnames';
 import DeliveryInfo from '../DeliveryInfo/DeliveryInfo';
 import ReturnInfo from '../ReturnInfo/ReturnInfo';
+import { IProductCart } from '../../../../models/API/CartApi/CartModels';
+import { useAppDispatch } from '../../../../hooks/redux';
+import { fetchCartAddProduct } from '../../../../store/reducers/Cart/Creators/CartCreator';
 
 interface IProductInfo {
     product: IProduct;
@@ -29,6 +32,24 @@ const ProductInfo: FC<IProductInfo> = ({
     const [activeDescr, setActiveDescr] = useState<boolean>(false);
     const [activeDelivery, setActiveDelivery] = useState<boolean>(false);
     const [returnActive, setReturnActive] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+
+    const sendProductToCart = async () => {
+        const productCart: IProductCart = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            size: activeSize,
+            gender: product.gender,
+            description: product.description,
+            brand: product.brand.name,
+            codeProduct: product.codeProduct,
+            images: product.images,
+            category: product.category.name
+        };
+
+        dispatch(fetchCartAddProduct(productCart));
+    };
 
     return (
         <div className='product-info'>
@@ -62,7 +83,7 @@ const ProductInfo: FC<IProductInfo> = ({
                 maringBottom={'24px'}
                 height={56}
                 text={['Добавить в корзину', activeSize + ' EU']}
-                onClick={() => {}}
+                onClick={sendProductToCart}
             />
             <ButtonMain
                 maringBottom={'1px'}

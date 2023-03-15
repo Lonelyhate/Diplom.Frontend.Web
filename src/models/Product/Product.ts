@@ -6,6 +6,7 @@ export interface IProduct {
     name: string,
     price: number,
     sizes: string,
+    gender: number,
     images: string,
     description: string,
     dateCreation: string,

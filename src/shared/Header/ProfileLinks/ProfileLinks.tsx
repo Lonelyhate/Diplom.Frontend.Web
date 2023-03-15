@@ -11,10 +11,13 @@ import CartPopup from '../CartPopup/CartPopup';
 const ProfileLinks: FC = () => {
     const { isAuth } = useAppSelector(state => state.userReducer);
     const { favorites } = useAppSelector(state => state.favortiesReducer);
+    const { cart, error, isLoading } = useAppSelector(
+        state => state.cartReducer
+    );
     const [isActiveProfile, setIsActiveProfile] = useState(false);
     const [isActiveCart, setIsActiveCart] = useState(false);
     const profileRef = useRef<HTMLDivElement>(null);
-    const profileBtnRef = useRef(null)
+    const profileBtnRef = useRef(null);
     const cartRef = useRef<HTMLDivElement>(null);
     const cartBtnRef = useRef(null);
 
@@ -24,9 +27,17 @@ const ProfileLinks: FC = () => {
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            console.log(event.composedPath())
-            if (!event.composedPath().includes(profileRef.current!) && !event.composedPath().includes(profileBtnRef.current!) ) {
+            if (
+                !event.composedPath().includes(profileRef.current!) &&
+                !event.composedPath().includes(profileBtnRef.current!)
+            ) {
                 setIsActiveProfile(false);
+            }
+            if (
+                !event.composedPath().includes(cartRef.current!) &&
+                !event.composedPath().includes(cartBtnRef.current!)
+            ) {
+                setIsActiveCart(false);
             }
         };
 
@@ -59,12 +70,18 @@ const ProfileLinks: FC = () => {
                 </li>
                 <li className='profile-links__item'>
                     <button
+                        ref={cartBtnRef}
                         onClick={() => {
                             setIsActiveCart(!isActiveCart);
                         }}
                         className='profile-links__button'
                     >
                         <ProfileNavigation.Cart.img size={24} />
+                        {cart && cart.countProducts > 0 && (
+                            <span className='profile-links__cart-span'>
+                                {cart.countProducts}
+                            </span>
+                        )}
                     </button>
                 </li>
                 <li className='profile-links__item '>
@@ -78,6 +95,7 @@ const ProfileLinks: FC = () => {
                 </li>
             </ul>
             <div
+                ref={cartRef}
                 className={cn('profile-links__cart', {
                     active: isActiveCart
                 })}

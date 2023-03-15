@@ -2,11 +2,56 @@
 
 .cart-popup {
     &__empty {
+        padding: 2.4rem 0;
         font-size: 1.4rem;
         line-height: 2rem;
         text-align: center;
         color: $primary-40;
         max-width: 312px;
         margin: 4rem 0;
+    }
+    &__header {
+        padding-top: 1.2rem;
+        display: flex;
+        margin-bottom: 1.2rem;
+    }
+    &__header-middle {
+        margin-left: auto;
+    }
+    &__title {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        font-weight: 400;
+    }
+    &__subtitle {
+        color: $primary-40;
+        font-size: 1.2rem;
+        line-height: 2rem;
+        font-weight: 400;
+    }
+    &__delete-all {
+        margin-left: auto;
+        padding: 0;
+        background-color: transparent;
+        cursor: pointer;
+        border: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease;
+        &:hover {
+            color: $primary-50;
+        }
+        svg {
+            transform: translateY(-3px);
+        }
+    }
+    &__list {
+        padding: 2.4rem 0;
+    }
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: 3.2rem;
+        }
     }
 }

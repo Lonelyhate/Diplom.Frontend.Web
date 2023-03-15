@@ -1,6 +1,6 @@
 import ApiType from '../ApiType';
 import BaseAPI from '../BaseAPI';
-import { ICart } from './CartModels';
+import { ICart, IProductCart } from './CartModels';
 
 class CartAPI extends BaseAPI {
     BaseUrl = 'http://localhost:5001/api/cart/';
@@ -11,6 +11,15 @@ class CartAPI extends BaseAPI {
             Url: '',
             AccessToken: localStorage.getItem('token')
         });
+    }
+
+    public async AddPRoductToCart(product: IProductCart) {
+        return await this.SendAsync<ICart>({
+            ApiType: ApiType.POST,
+            Url: "add",
+            AccessToken: localStorage.getItem("token"),
+            Data: product
+        })
     }
 }
 
