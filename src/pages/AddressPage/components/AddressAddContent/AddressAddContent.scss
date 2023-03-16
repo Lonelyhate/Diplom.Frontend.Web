@@ -1,0 +1,77 @@
+@import "../../../../styles/variables.scss";
+
+.add-address {
+    padding: 2.4rem;
+    padding-top: 0;
+    width: 500px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    &__header {
+        display: flex;
+        align-items: center;
+    }
+    &__title {
+        font-weight: 400;
+        margin-left: auto;
+        padding: 24px 0;
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+    &__close {
+        margin-left: auto;
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        cursor: pointer;
+        transform: translateY(4px);
+    }
+    &__info {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 8px;
+    }
+    &__input {
+        position: relative;
+    }
+    &__clear {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 100%;
+        padding: 3px;
+        background-color: $primary-40;
+        color: #fff;
+        transition: background-color 0.3s ease;
+        &:hover {
+            background-color: #000;
+        }
+    }
+    &__help {
+        color: $primary-40;
+        font-size: 12px;
+        line-height: 16px;
+        margin-top: 8px;
+    }
+    &__error {
+        color: $red;
+        font-size: 12px;
+        line-height: 16px;
+        margin-top: 8px;
+    }
+}
+
+.react-dadata__input {
+    font-size: 1.4rem;
+    &:focus {
+        border: 1px solid #000 !important;
+        box-shadow: none;
+    }
+}

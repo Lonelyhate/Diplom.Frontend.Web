@@ -1,0 +1,10 @@
+.address-page {
+    &__container {
+        display: flex;
+    }
+    &__content {
+        padding: 30px 0;
+        width: 540px;
+        margin: 0 auto;
+    }
+}

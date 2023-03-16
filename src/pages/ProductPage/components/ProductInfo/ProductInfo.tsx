@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import './ProductInfo.scss';
 import { IProduct } from '../../../../models/Product/Product';
 import ButtonMain from '../../../../UI/ButtonMain/ButtonMain';
@@ -10,8 +10,14 @@ import cn from 'classnames';
 import DeliveryInfo from '../DeliveryInfo/DeliveryInfo';
 import ReturnInfo from '../ReturnInfo/ReturnInfo';
 import { IProductCart } from '../../../../models/API/CartApi/CartModels';
-import { useAppDispatch } from '../../../../hooks/redux';
-import { fetchCartAddProduct } from '../../../../store/reducers/Cart/Creators/CartCreator';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import {
+    fetchCartAddProduct,
+    fetchMinusProductCart,
+    fetchPlusProductCart
+} from '../../../../store/reducers/Cart/Creators/CartCreator';
+import { AiOutlineMinus } from 'react-icons/ai';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 interface IProductInfo {
     product: IProduct;
@@ -26,8 +32,12 @@ const ProductInfo: FC<IProductInfo> = ({
     addToFavorites,
     deleteFromFavorites
 }) => {
+    const { isLoading, cart, isLoadingPlus, isLoadingMinus } = useAppSelector(
+        state => state.cartReducer
+    );
     const sizes = product.sizes.split(';');
     const [activeSize, setActiveSeize] = useState<string>(sizes[0]);
+    const [currentCount, setCurrentCount] = useState<number>(0);
     const [activeModalSize, setActiveModalSize] = useState<boolean>(false);
     const [activeDescr, setActiveDescr] = useState<boolean>(false);
     const [activeDelivery, setActiveDelivery] = useState<boolean>(false);
@@ -47,9 +57,28 @@ const ProductInfo: FC<IProductInfo> = ({
             images: product.images,
             category: product.category.name
         };
-
+        setCurrentCount(currentCount + 1);
         dispatch(fetchCartAddProduct(productCart));
     };
+
+    const onPlusProduct = () => {
+        dispatch(fetchPlusProductCart(product.id, Number(activeSize)));
+    };
+
+    const onMinusProduct = () => {
+        dispatch(fetchMinusProductCart(product.id, Number(activeSize)));
+    };
+
+    useEffect(() => {
+        const currentProductSize = cart?.products.find(
+            p => p.id == product.id && p.size == activeSize
+        );
+        if (currentProductSize) {
+            setCurrentCount(currentProductSize.count!);
+        } else {
+            setCurrentCount(0);
+        }
+    }, [activeSize, cart?.products]);
 
     return (
         <div className='product-info'>
@@ -79,12 +108,43 @@ const ProductInfo: FC<IProductInfo> = ({
             <div className='product-info__price'>
                 {product.price.toLocaleString()} ₽
             </div>
-            <ButtonMain
-                maringBottom={'24px'}
-                height={56}
-                text={['Добавить в корзину', activeSize + ' EU']}
-                onClick={sendProductToCart}
-            />
+            {currentCount == 0 || isLoading ? (
+                <ButtonMain
+                    isLoading={isLoading}
+                    maringBottom={'24px'}
+                    height={56}
+                    text={['Добавить в корзину', activeSize + ' EU']}
+                    onClick={sendProductToCart}
+                />
+            ) : (
+                <div className='product-info__plus-minus'>
+                    <ButtonMain
+                        sizeSpinner={25}
+                        widthBorder={3}
+                        fontSize={'2.5rem'}
+                        onClick={onMinusProduct}
+                        width={56}
+                        height={56}
+                        backGround='gray'
+                        text={AiOutlineMinus}
+                        isLoading={isLoadingMinus}
+                    />
+                    <span className='product-info__count'>
+                        {currentCount} в корзине
+                    </span>
+                    <ButtonMain
+                        sizeSpinner={25}
+                        widthBorder={3}
+                        isLoading={isLoadingPlus}
+                        fontSize={'2.5rem'}
+                        width={56}
+                        height={56}
+                        onClick={onPlusProduct}
+                        backGround='gray'
+                        text={AiOutlinePlus}
+                    />
+                </div>
+            )}
             <ButtonMain
                 maringBottom={'1px'}
                 height={56}

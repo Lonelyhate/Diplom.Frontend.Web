@@ -8,6 +8,7 @@ import AdminBlog from './pages/AdminPage/Components/AdminBlog/AdminBlog';
 import { Route, Routes } from 'react-router-dom';
 import {
     ACCOUNT_URL,
+    ADDRESS_URL,
     ADMIN_BLOG_URL,
     ADMIN_PRODUCT_URL,
     ADMIN_URL,
@@ -20,6 +21,7 @@ import {
 import HomePage from './pages/HomePage/HomePage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import FavortiesPage from './pages/FavoritesPage/FavortiesPage';
+import AddressPage from './pages/AddressPage/AddressPage';
 
 const RoutesComponent: FC = () => {
     return (
@@ -33,6 +35,7 @@ const RoutesComponent: FC = () => {
             <Route path={ADMIN_BLOG_URL} element={<AdminBlog />} />
             <Route path={`${PRODUCT_PAGE_URL}/:id`} element={<ProductPage />} />
             <Route path={FAVORITES_URL} element={<FavortiesPage />} />
+            <Route path={ADDRESS_URL} element={<AddressPage />} />
         </Routes>
     );
 };

@@ -24,7 +24,6 @@ function App() {
     useEffect(() => {
         dispatch(fetchUserAuth());
         dispatch(fetchFavoritesAll())
-        test();
     }, []);
 
     useEffect(() => {

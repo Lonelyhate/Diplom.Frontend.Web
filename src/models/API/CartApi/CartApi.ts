@@ -13,13 +13,45 @@ class CartAPI extends BaseAPI {
         });
     }
 
-    public async AddPRoductToCart(product: IProductCart) {
+    public async AddProductToCart(product: IProductCart) {
         return await this.SendAsync<ICart>({
             ApiType: ApiType.POST,
-            Url: "add",
-            AccessToken: localStorage.getItem("token"),
+            Url: 'add',
+            AccessToken: localStorage.getItem('token'),
             Data: product
-        })
+        });
+    }
+
+    public async DeleteAllProduct() {
+        return await this.SendAsync<ICart>({
+            ApiType: ApiType.DELETE,
+            Url: '',
+            AccessToken: localStorage.getItem('token')
+        });
+    }
+
+    public async PlusProduct(productid: number, size: number) {
+        return await this.SendAsync<ICart>({
+            ApiType: ApiType.POST,
+            Url: 'plus',
+            AccessToken: localStorage.getItem('token'),
+            Data: {
+                productid,
+                size
+            }
+        });
+    }
+
+    public async MinusProduct(productid: number, size: number) {
+        return await this.SendAsync<ICart>({
+            ApiType: ApiType.POST,
+            Url: 'minus',
+            AccessToken: localStorage.getItem('token'),
+            Data: {
+                productid,
+                size
+            }
+        });
     }
 }
 

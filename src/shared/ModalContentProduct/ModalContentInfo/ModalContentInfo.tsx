@@ -2,6 +2,9 @@ import React, { FC, useState } from 'react';
 import './ModalContentInfo.scss';
 import { IProduct } from '../../../models/Product/Product';
 import ButtonMain from '../../../UI/ButtonMain/ButtonMain';
+import { IProductCart } from '../../../models/API/CartApi/CartModels';
+import { fetchCartAddProduct } from '../../../store/reducers/Cart/Creators/CartCreator';
+import { useAppDispatch } from '../../../hooks/redux';
 
 interface IModalContentInfo {
     product: IProduct;
@@ -10,6 +13,24 @@ interface IModalContentInfo {
 const ModalContentInfo: FC<IModalContentInfo> = ({ product }) => {
     const sizes: string[] = product.sizes.split(';');
     const [activeSize, setActiveSize] = useState<string>(sizes[0]);
+    const dispatch = useAppDispatch();
+
+    const onSendProductToCart = () => {
+        const productCart: IProductCart = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            size: activeSize,
+            gender: product.gender,
+            description: product.description,
+            brand: product.brand.name,
+            codeProduct: product.codeProduct,
+            images: product.images,
+            category: product.category.name
+        };
+
+        dispatch(fetchCartAddProduct(productCart));
+    };
 
     return (
         <div className='content-info'>
@@ -40,10 +61,10 @@ const ModalContentInfo: FC<IModalContentInfo> = ({ product }) => {
                         height={56}
                         backGround='gray'
                         text={'Заказ в один клик'}
-                        marginRight={"1rem"}
+                        marginRight={'1rem'}
                     />
                     <ButtonMain
-                        onClick={() => {}}
+                        onClick={onSendProductToCart}
                         height={56}
                         backGround='primary'
                         text={['Добавить в корзину', activeSize + ' EU']}
