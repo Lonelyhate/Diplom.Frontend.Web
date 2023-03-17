@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import './ProductCard.scss';
 import { Link } from 'react-router-dom';
 import { useFirstImage } from '../../hooks/images';
-import { IProduct } from '../../models/Product/Product';
+import { IProduct } from '../../models/Models/Product/Product';
 import { IoIosStar } from 'react-icons/io';
 import { FiSearch } from 'react-icons/fi';
 import { PRODUCT_PAGE_URL } from '../../models/urls';

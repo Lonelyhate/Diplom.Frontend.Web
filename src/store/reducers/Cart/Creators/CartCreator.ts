@@ -1,5 +1,5 @@
 import CartApi from '../../../../models/API/CartApi/CartApi';
-import { IProductCart } from '../../../../models/API/CartApi/CartModels';
+import { IProductCart } from '../../../../models/Models/Cart/CartModels';
 import { AppDispatch } from '../../../store';
 import { cartSlice } from '../Slices/CartSlice';
 

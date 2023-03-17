@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import TitleMain from '../../../../UI/TitleMain/TitleMain';
 import { RxCross1 } from 'react-icons/rx';
 import {
@@ -10,18 +10,34 @@ import 'react-dadata/dist/react-dadata.css';
 import ButtonMain from '../../../../UI/ButtonMain/ButtonMain';
 import './AddressAddContent.scss';
 import { MdClear } from 'react-icons/md';
+import { useAppDispatch } from '../../../../hooks/redux';
+import {
+    fetchAddressAdd,
+    fetchAddressUpdate
+} from '../../../../store/reducers/User/creators/AddressCreator';
+import { IAddress } from '../../../../models/Models/User/Address';
 
 interface IAddressAddContent {
     onCloseModal: (value: boolean) => void;
+    update: boolean;
+    address?: IAddress | null;
+    setAddress: (value: IAddress) => void
 }
 
-const AddressAddContent: FC<IAddressAddContent> = ({ onCloseModal }) => {
+const AddressAddContent: FC<IAddressAddContent> = ({
+    onCloseModal,
+    update,
+    address,
+    setAddress
+}) => {
+    const dispatch = useAppDispatch();
     const [value, setValue] = useState<
         DaDataSuggestion<DaDataAddress> | undefined
     >();
     const [errorMessage, setErrorMessage] = useState<string>('');
     const closeModal = () => {
         onCloseModal(false);
+        setValue(undefined);
     };
 
     const onSaveAddress = () => {
@@ -47,12 +63,20 @@ const AddressAddContent: FC<IAddressAddContent> = ({ onCloseModal }) => {
         }
 
         setErrorMessage('');
+        if (update && address) {
+            dispatch(fetchAddressUpdate(address.id, value.value));
+        } else {
+            dispatch(fetchAddressAdd(value.value));
+        }
+        closeModal();
     };
 
     return (
         <div className='add-address'>
             <div className='add-address__header'>
-                <h3 className='add-address__title'>Новый адрес</h3>
+                <h3 className='add-address__title'>
+                    {!update ? 'Новый адрес' : 'Редактировать'}
+                </h3>
                 <button onClick={closeModal} className='add-address__close'>
                     <RxCross1 size={20} />
                 </button>

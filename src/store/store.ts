@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer from './reducers/User/UserSlice';
+import userReducer from './reducers/User/slices/UserSlice';
 import brandReducer from './reducers/Product/Slices/BrandSlice';
 import categoryReducer from './reducers/Product/Slices/CategorySlice';
 import productReducer from './reducers/Product/Slices/ProductSlice';
@@ -7,6 +7,7 @@ import productNewReducer from './reducers/Product/Slices/ProductNewSlice';
 import blogReducer from './reducers/Blog/Slices/BlogSlice';
 import favoritesReducer from './reducers/Product/Slices/FavoritesSlice';
 import cartReducer from './reducers/Cart/Slices/CartSlice';
+import addressReducer from './reducers/User/slices/AddressSlice';
 
 const rootReducer = combineReducers({
     userReducer: userReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     productNewReducer: productNewReducer,
     blogReducer: blogReducer,
     favortiesReducer: favoritesReducer,
-    cartReducer: cartReducer
+    cartReducer: cartReducer,
+    addressReducer: addressReducer
 });
 
 export const setupStore = () => {

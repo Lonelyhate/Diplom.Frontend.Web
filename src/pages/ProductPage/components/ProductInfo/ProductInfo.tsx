@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import './ProductInfo.scss';
-import { IProduct } from '../../../../models/Product/Product';
+import { IProduct } from '../../../../models/Models/Product/Product';
 import ButtonMain from '../../../../UI/ButtonMain/ButtonMain';
 import { IoStarSharp } from 'react-icons/io5';
 import { BiPlus } from 'react-icons/bi';
@@ -9,7 +9,7 @@ import SizesTable from '../SizesTable/SizesTable';
 import cn from 'classnames';
 import DeliveryInfo from '../DeliveryInfo/DeliveryInfo';
 import ReturnInfo from '../ReturnInfo/ReturnInfo';
-import { IProductCart } from '../../../../models/API/CartApi/CartModels';
+import { IProductCart } from '../../../../models/Models/Cart/CartModels';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import {
     fetchCartAddProduct,

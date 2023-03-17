@@ -1,6 +1,6 @@
 import ProductApi from '../../../../models/API/ProductApi/ProductApi';
-import { IProductCreateRequestModel } from '../../../../models/API/ProductApi/ProductCreateRequestModel';
-import { IProduct } from '../../../../models/Product/Product';
+import { IProductCreateRequestModel } from '../../../../models/Models/Product/ProductCreateRequestModel';
+import { IProduct } from '../../../../models/Models/Product/Product';
 import { AppDispatch } from '../../../store';
 import { productNewSlice } from '../Slices/ProductNewSlice';
 import { productSlice } from '../Slices/ProductSlice';

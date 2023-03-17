@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 import './ModalContentInfo.scss';
-import { IProduct } from '../../../models/Product/Product';
+import { IProduct } from '../../../models/Models/Product/Product';
 import ButtonMain from '../../../UI/ButtonMain/ButtonMain';
-import { IProductCart } from '../../../models/API/CartApi/CartModels';
+import { IProductCart } from '../../../models/Models/Cart/CartModels';
 import { fetchCartAddProduct } from '../../../store/reducers/Cart/Creators/CartCreator';
 import { useAppDispatch } from '../../../hooks/redux';
 

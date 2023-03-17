@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import './ModalContentProduct.scss';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { IProduct } from '../../models/Product/Product';
+import { IProduct } from '../../models/Models/Product/Product';
 import { RxCross1 } from 'react-icons/rx';
 import ButtonMain from '../../UI/ButtonMain/ButtonMain';
 import ModalContentImages from './ModalContentImages/ModalContentImages';
@@ -19,18 +19,17 @@ interface IModalContentProduct {
 
 const ModalContentProduct: FC<IModalContentProduct> = ({ product }) => {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
+
     const toPageProduct = () => {
-        navigate(PRODUCT_PAGE_URL + "/" + product.id.toString())
-        closeModal()
-    }
+        navigate(PRODUCT_PAGE_URL + '/' + product.id.toString());
+        closeModal();
+    };
 
     const closeModal = () => {
         dispatch(setModalProductVisable(false));
         dispatch(setProductForModal(null));
     };
-
 
     return (
         <div className='modal-product'>

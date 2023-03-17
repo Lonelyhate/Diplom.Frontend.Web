@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import './CartItem.scss';
 import { Link } from 'react-router-dom';
 import { PRODUCT_API_ADDRESS } from '../../Env';
-import { IProductCart } from '../../models/API/CartApi/CartModels';
+import { IProductCart } from '../../models/Models/Cart/CartModels';
 import ButtonMain from '../../UI/ButtonMain/ButtonMain';
 import { AiOutlineMinus } from 'react-icons/ai';
 import { AiOutlinePlus } from 'react-icons/ai';

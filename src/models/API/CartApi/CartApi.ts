@@ -1,6 +1,6 @@
 import ApiType from '../ApiType';
 import BaseAPI from '../BaseAPI';
-import { ICart, IProductCart } from './CartModels';
+import { ICart, IProductCart } from '../../Models/Cart/CartModels';
 
 class CartAPI extends BaseAPI {
     BaseUrl = 'http://localhost:5001/api/cart/';

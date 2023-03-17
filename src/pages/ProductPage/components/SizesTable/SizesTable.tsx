@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import "./SizesTable.scss";
 import { RxCross2 } from "react-icons/rx";
-import { sizes } from "../../../../models/Sizes";
+import { sizes } from "../../../../models/Models/Product/Sizes";
 
 interface ISizesTable {
     closeVisable: (visable: false) => void

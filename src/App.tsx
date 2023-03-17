@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './styles/global.scss';
 import Header from './shared/Header/Header';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { fetchUserAuth } from './store/reducers/User/ActionCreator';
+import { fetchUserAuth } from './store/reducers/User/creators/UserCreator';
 import Footer from './shared/Footer/Footer';
 import RoutesComponent from './RoutesComponent';
 import axios from 'axios';
@@ -14,21 +14,23 @@ import { useLocation } from 'react-router-dom';
 
 function App() {
     const dispatch = useAppDispatch();
-    const {currentProductForModal, visableModalProduct} = useAppSelector(state => state.productReducer)
-    const location = useLocation()
+    const { currentProductForModal, visableModalProduct } = useAppSelector(
+        state => state.productReducer
+    );
+    const location = useLocation();
 
     const closeModalProduct = (value: boolean) => {
-        dispatch(setModalProductVisable(value))
-    }
+        dispatch(setModalProductVisable(value));
+    };
 
     useEffect(() => {
         dispatch(fetchUserAuth());
-        dispatch(fetchFavoritesAll())
+        dispatch(fetchFavoritesAll());
     }, []);
 
     useEffect(() => {
-        window.scrollTo({top: 0});
-    }, [location])
+        window.scrollTo({ top: 0 });
+    }, [location]);
 
     const test = async () => {
         // await axios.delete('https://localhost:7081/api/Favorites/6', {

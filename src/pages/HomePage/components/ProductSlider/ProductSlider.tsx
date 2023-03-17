@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 import ProductItem from '../../../../shared/ProductItem/ProductCard';
-import { IProduct } from '../../../../models/Product/Product';
+import { IProduct } from '../../../../models/Models/Product/Product';
 
 interface IProductSlider {
     items: IProduct[];
