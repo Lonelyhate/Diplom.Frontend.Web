@@ -10,8 +10,11 @@ import ButtonMain from '../../../UI/ButtonMain/ButtonMain';
 import { BsTrash } from 'react-icons/bs';
 import CartItem from '../../CartItem/CartItem';
 import { loadavg } from 'os';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { CHECKOUT_PAGE_URL } from '../../../models/urls';
 
 const CartPopup: FC = () => {
+    const navigation = useNavigate();
     const dispatch = useAppDispatch();
     const { cart, error, isLoading, isLoadingPlus, isLoadingMinus } =
         useAppSelector(state => state.cartReducer);
@@ -23,6 +26,10 @@ const CartPopup: FC = () => {
     useEffect(() => {
         dispatch(fetchCart());
     }, []);
+
+    const onToCheckout = () => {
+        navigation(CHECKOUT_PAGE_URL)
+    }
 
     return (
         <>
@@ -60,7 +67,7 @@ const CartPopup: FC = () => {
                             isLoading={isLoadingPlus && isLoadingPlus}
                             height={48}
                             maringBottom='0.8rem'
-                            onClick={() => {}}
+                            onClick={onToCheckout}
                             text={`Оформить заказ на ${cart.amount.toLocaleString()} ₽`}
                         />
                         <ButtonMain

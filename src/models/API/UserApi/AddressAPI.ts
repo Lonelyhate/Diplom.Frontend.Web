@@ -39,7 +39,7 @@ class AddressAPI extends BaseAPI {
     public async Delete(id: number) {
         return await this.SendAsync<boolean>({
             ApiType: ApiType.DELETE,
-            Url: '/' + id,
+            Url: '' + id,
             AccessToken: localStorage.getItem('token')
         });
     }

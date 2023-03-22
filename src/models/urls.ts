@@ -8,6 +8,7 @@ export const CONTACT_URL = HOME_URL + 'contact';
 export const MAGAZINE_URL = HOME_URL + 'magazine';
 export const BLOG_URL = HOME_URL + 'news';
 export const PRODUCT_PAGE_URL = HOME_URL + 'product';
+export const CHECKOUT_PAGE_URL = HOME_URL + "checkout";
 
 export const FAQ_URL = HOME_URL + 'faq';
 export const SHIPPING_FAQ_URL = FAQ_URL + '/shipping_faq';
@@ -35,4 +36,5 @@ export class Urls {
     readonly AdminProduct: string = ADMIN_PRODUCT_URL;
     readonly AdminBlog: string = ADMIN_BLOG_URL;
     readonly Address: string = ADDRESS_URL;
+    readonly Checkout: string = CHECKOUT_PAGE_URL;
 }
