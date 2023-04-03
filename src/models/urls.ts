@@ -9,6 +9,8 @@ export const MAGAZINE_URL = HOME_URL + 'magazine';
 export const BLOG_URL = HOME_URL + 'news';
 export const PRODUCT_PAGE_URL = HOME_URL + 'product';
 export const CHECKOUT_PAGE_URL = HOME_URL + "checkout";
+export const PAYTURE_PAGE_URL = HOME_URL + "payment"
+export const ORDER_SUCCESS_URL = HOME_URL + "orders/success"
 
 export const FAQ_URL = HOME_URL + 'faq';
 export const SHIPPING_FAQ_URL = FAQ_URL + '/shipping_faq';
@@ -37,4 +39,6 @@ export class Urls {
     readonly AdminBlog: string = ADMIN_BLOG_URL;
     readonly Address: string = ADDRESS_URL;
     readonly Checkout: string = CHECKOUT_PAGE_URL;
+    readonly Payture: string = PAYTURE_PAGE_URL;
+    readonly OrdersSuccess: string = ORDER_SUCCESS_URL;
 }

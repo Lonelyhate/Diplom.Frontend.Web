@@ -17,6 +17,7 @@ const ModalContentInfo: FC<IModalContentInfo> = ({ product }) => {
 
     const onSendProductToCart = () => {
         const productCart: IProductCart = {
+            _id: product._id,
             id: product.id,
             name: product.name,
             price: product.price,
@@ -52,17 +53,9 @@ const ModalContentInfo: FC<IModalContentInfo> = ({ product }) => {
                 ))}
             </ul>
             <div className='content-info__bottom'>
-                <div className='content-info__price'>
-                    {product.price.toLocaleString()} ₽
-                </div>
+                <div className='content-info__price'>{product.price.toLocaleString()} ₽</div>
                 <div className='content-info__btns'>
-                    <ButtonMain
-                        onClick={() => {}}
-                        height={56}
-                        backGround='gray'
-                        text={'Заказ в один клик'}
-                        marginRight={'1rem'}
-                    />
+                    <ButtonMain onClick={() => {}} height={56} backGround='gray' text={'Заказ в один клик'} marginRight={'1rem'} />
                     <ButtonMain
                         onClick={onSendProductToCart}
                         height={56}

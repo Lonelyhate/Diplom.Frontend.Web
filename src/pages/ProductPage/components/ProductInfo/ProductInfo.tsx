@@ -46,6 +46,7 @@ const ProductInfo: FC<IProductInfo> = ({
 
     const sendProductToCart = async () => {
         const productCart: IProductCart = {
+            _id: product._id,
             id: product.id,
             name: product.name,
             price: product.price,

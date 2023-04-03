@@ -12,7 +12,7 @@ export type deliveryMethodTypeItem = {
 };
 
 class DeliveryMethod {
-    private readonly Pickup: deliveryMethodTypeItem = {
+    readonly Pickup: deliveryMethodTypeItem = {
         name: 'Cамовывоз',
         img: pickupImg,
         price: 0,
@@ -20,20 +20,20 @@ class DeliveryMethod {
             'Самовывоз осуществляется из магазина по адресу Каретный ряд, 8. По готовности заказа вы получите SMS-уведомление. Срок хранения: 2 календарных дня.'
     };
 
-    private readonly EMS: deliveryMethodTypeItem = {
+    readonly EMS: deliveryMethodTypeItem = {
         name: 'EMS Почта России',
         img: emsImg,
         price: 1250
     };
 
-    private readonly DeliveryRussia: deliveryMethodTypeItem = {
+    readonly DeliveryRussia: deliveryMethodTypeItem = {
         name: 'Почта России',
         img: deliveryRussiaImg,
         note: 'Бесплатно',
         price: 0
     };
 
-    private readonly Cdek: deliveryMethodTypeItem = {
+    readonly Cdek: deliveryMethodTypeItem = {
         name: 'Курьером СДЭК (за МКАД и в Подмосковье)',
         img: cdekImg,
         price: 600,

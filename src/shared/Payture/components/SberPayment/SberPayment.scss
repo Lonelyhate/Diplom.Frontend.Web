@@ -1,0 +1,21 @@
+.sber-payment {
+    &__btn {
+        width: 100%;
+        background-color: #04781a;
+        font-size: 18px;
+        border: none;
+        height: 52px;
+        border-radius: 8px;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        img {
+            margin-right: 5px;
+            display: block;
+            width: auto;
+            height: 30px;
+        }
+    }
+}

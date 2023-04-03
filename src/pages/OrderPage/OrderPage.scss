@@ -1,10 +1,12 @@
+@import "../../styles/variables.scss";
+
 .order-page {
     &__container{
         display: flex;
     }
     &__content{
         padding: 30px 0;
-        width: 540px;
+        width: 564px;
         margin: 0 auto;
     }
     &__title{
@@ -13,5 +15,9 @@
         font-size: 1.8rem;
         margin-bottom: 2.4rem;
         line-height: 2.4rem;
+    }
+    &__item {
+        padding: 0.8rem 0.8rem;
+        border-bottom: 1px solid $primary-5;
     }
 }

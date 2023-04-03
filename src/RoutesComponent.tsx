@@ -17,6 +17,8 @@ import {
     FAVORITES_URL,
     HOME_URL,
     ORDERS_URL,
+    ORDER_SUCCESS_URL,
+    PAYTURE_PAGE_URL,
     PRODUCT_PAGE_URL
 } from './models/urls';
 import HomePage from './pages/HomePage/HomePage';
@@ -24,6 +26,8 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import FavortiesPage from './pages/FavoritesPage/FavortiesPage';
 import AddressPage from './pages/AddressPage/AddressPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
+import Payture from './shared/Payture/Payture';
+import OrderSuccessPage from './pages/OrderSuccessPage/OrderSuccessPage';
 
 const RoutesComponent: FC = () => {
     return (
@@ -39,6 +43,8 @@ const RoutesComponent: FC = () => {
             <Route path={FAVORITES_URL} element={<FavortiesPage />} />
             <Route path={ADDRESS_URL} element={<AddressPage />} />
             <Route path={CHECKOUT_PAGE_URL} element={<CheckoutPage />} />
+            <Route path={`${PAYTURE_PAGE_URL}/:type`} element={<Payture />} />
+            <Route path={ORDER_SUCCESS_URL} element={<OrderSuccessPage />} />
         </Routes>
     );
 };

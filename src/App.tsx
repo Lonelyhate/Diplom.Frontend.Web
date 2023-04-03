@@ -11,12 +11,14 @@ import Modal from './UI/Modal/Modal';
 import ModalContentProduct from './shared/ModalContentProduct/ModalContentProduct';
 import { setModalProductVisable } from './store/reducers/Product/Creators/ProductCreator';
 import { useLocation } from 'react-router-dom';
+import { fetchOrdersByUser } from './store/reducers/Cart/Creators/OrderCreator';
+import { fetchDiscountCreate, fetchDiscountDelete, fetchDiscountGetById } from './store/reducers/User/creators/DiscountCreator';
 
 function App() {
     const dispatch = useAppDispatch();
-    const { currentProductForModal, visableModalProduct } = useAppSelector(
-        state => state.productReducer
-    );
+    const { currentProductForModal, visableModalProduct } = useAppSelector(state => state.productReducer);
+    const { currentUser, isAuth } = useAppSelector(state => state.userReducer);
+    const { discount } = useAppSelector(state => state.discountReducer);
     const location = useLocation();
 
     const closeModalProduct = (value: boolean) => {
@@ -26,7 +28,17 @@ function App() {
     useEffect(() => {
         dispatch(fetchUserAuth());
         dispatch(fetchFavoritesAll());
+        dispatch(fetchOrdersByUser());
+        dispatch(fetchDiscountCreate());
     }, []);
+
+    useEffect(() => {
+        if (isAuth && currentUser != null && discount == null) {
+            dispatch(fetchDiscountCreate());
+        } else {
+            dispatch(fetchDiscountDelete())
+        }
+    }, [currentUser]);
 
     useEffect(() => {
         window.scrollTo({ top: 0 });
@@ -48,9 +60,7 @@ function App() {
             </main>
             <Footer />
             <Modal visable={visableModalProduct} setVisable={closeModalProduct}>
-                {currentProductForModal && (
-                    <ModalContentProduct product={currentProductForModal} />
-                )}
+                {currentProductForModal && <ModalContentProduct product={currentProductForModal} />}
             </Modal>
         </div>
     );

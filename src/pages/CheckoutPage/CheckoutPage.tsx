@@ -10,6 +10,12 @@ import TypePayment, { paymentItem } from '../../models/TypePayment/TypePayment';
 import ButtonMain from '../../UI/ButtonMain/ButtonMain';
 import cn from 'classnames';
 import CartItem from '../../shared/CartItem/CartItem';
+import { useNavigate } from 'react-router-dom';
+import { ORDER_SUCCESS_URL, PAYTURE_PAGE_URL } from '../../models/urls';
+import { IOrderModel } from '../../models/Models/Cart/OrderModel';
+import { fetchMakeOrder } from '../../store/reducers/Cart/Creators/OrderCreator';
+import { fetchDeleteAllProductsCart } from '../../store/reducers/Cart/Creators/CartCreator';
+import { fetchDiscountUpdate } from '../../store/reducers/User/creators/DiscountCreator';
 
 const CheckoutPage: FC = () => {
     const dispatch = useAppDispatch();
@@ -21,6 +27,8 @@ const CheckoutPage: FC = () => {
     const [activeTypeDelivery, setActiveTypeDelivery] = useState<deliveryMethodTypeItem>(DeliveryMethod.DelvieryArray[0]);
     const [activeTypePayment, setActiveTypePayment] = useState<paymentItem>(TypePayment.ItemsArray[0]);
     const [totalCost, setTotalCost] = useState<number>(0);
+    const [comment, setComment] = useState<string>('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchAddresses());
@@ -44,6 +52,43 @@ const CheckoutPage: FC = () => {
 
     const onClickPaymentMethod = (item: paymentItem) => {
         setActiveTypePayment(item);
+    };
+
+    const onClickToPayment = () => {
+        const url = PAYTURE_PAGE_URL + '/';
+        switch (activeTypePayment) {
+            case TypePayment.Payture:
+                navigate(url + 'payture');
+                break;
+            case TypePayment.Yandex:
+                navigate(url + 'yandex');
+                break;
+            case TypePayment.Sber:
+                navigate(url + 'sber');
+                break;
+            default:
+                onClickMakeOrder();
+                break;
+        }
+    };
+
+    const onClickMakeOrder = () => {
+        const request: IOrderModel = {
+            firstname: firstname,
+            lastname: lastname,
+            address: addresses.find(a => a.isActiveAddress)!.address,
+            amount: totalCost,
+            date: new Date(),
+            deliveryType: activeTypeDelivery.name,
+            comment: comment,
+            paymentType: activeTypePayment.name,
+            cartProduct: cart?.products!,
+            numberPhone: currentUser!.phone!
+        };
+        navigate(ORDER_SUCCESS_URL);
+        dispatch(fetchDiscountUpdate(cart?.amount!));
+        dispatch(fetchMakeOrder(request));
+        dispatch(fetchDeleteAllProductsCart());
     };
 
     return (
@@ -102,7 +147,12 @@ const CheckoutPage: FC = () => {
                         ))}
                     </ul>
                     <div className='checkout-page__comment font_m'>Коментарий к заказу (не обязательно)</div>
-                    <textarea className='checkout-page__comment-text' placeholder='Комментарий к заказу...'></textarea>
+                    <textarea
+                        onChange={e => setComment(e.target.value)}
+                        value={comment}
+                        className='checkout-page__comment-text'
+                        placeholder='Комментарий к заказу...'
+                    ></textarea>
                     <h3 className='checkout-page__subtitle'>4. Способ оплаты</h3>
                     <ul className='checkout-page__payments payments'>
                         {TypePayment.ItemsArray.map(item => (
@@ -122,7 +172,7 @@ const CheckoutPage: FC = () => {
                     </ul>
                     <ButtonMain
                         height={48}
-                        onClick={() => {}}
+                        onClick={onClickToPayment}
                         text={TypePayment.Cash == activeTypePayment ? 'Подтвердить заказ' : 'Перейти к оплате'}
                     />
                 </div>

@@ -1,0 +1,55 @@
+@import "../../../../styles/variables.scss";
+
+.order-item {
+    cursor: pointer;
+    width: 100%;
+    padding: 2.4rem;
+    transition: background-color 0.3s ease;
+    border-radius: 0.4rem;
+    &:hover {
+        background-color: $primary-5;
+    }
+    &__header {
+        display: flex;
+        margin-bottom: 2.4rem;
+    }
+    &__img {
+        display: block;
+        width: 56px;
+        height: 56px;
+        &:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+    &__bottom {
+        display: flex;
+    }
+    &__column {
+        &:not(:last-child) {
+            margin-right: 2.4rem;
+        }
+    }
+    &__name {
+        white-space: nowrap;
+        color: $primary-40;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+        margin-bottom: 0.4rem;
+    }
+    &__value {
+        padding-bottom: 0.4rem;
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+    &__status {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        background-color: $primary-5;
+        color: $primary-40;
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

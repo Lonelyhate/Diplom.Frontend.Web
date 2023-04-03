@@ -8,6 +8,8 @@ import blogReducer from './reducers/Blog/Slices/BlogSlice';
 import favoritesReducer from './reducers/Product/Slices/FavoritesSlice';
 import cartReducer from './reducers/Cart/Slices/CartSlice';
 import addressReducer from './reducers/User/slices/AddressSlice';
+import orderReducer from "./reducers/Cart/Slices/OrderSlice";
+import discountReducer from "./reducers/User/slices/DiscountSlice";
 
 const rootReducer = combineReducers({
     userReducer: userReducer,
@@ -18,7 +20,9 @@ const rootReducer = combineReducers({
     blogReducer: blogReducer,
     favortiesReducer: favoritesReducer,
     cartReducer: cartReducer,
-    addressReducer: addressReducer
+    addressReducer: addressReducer,
+    orderReducer: orderReducer,
+    discountReducer: discountReducer
 });
 
 export const setupStore = () => {

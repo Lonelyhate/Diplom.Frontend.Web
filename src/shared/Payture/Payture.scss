@@ -1,0 +1,155 @@
+@import '../../styles/variables.scss';
+
+.payture {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: $background;
+    z-index: 1000;
+    &__content {
+        padding-top: 30px;
+        width: 336px;
+        margin: 0 auto;
+    }
+    &__logo {
+        display: flex;
+        margin-bottom: 30px;
+        &-title {
+            font-size: 22px;
+            font-weight: 700;
+            padding-top: 4px;
+        }
+        &-text {
+            font-size: 13px;
+        }
+        img {
+            display: block;
+            height: 40px;
+            margin-right: 10px;
+        }
+    }
+    &__header {
+        margin-bottom: 15px;
+    }
+    &__price {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 38px;
+    }
+    &__number-order {
+        color: #8c8c8c;
+        font-size: 13px;
+    }
+    &__btn {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__info {
+        max-width: 166px;
+        color: #8c8c8c;
+        font-size: 13px;
+        a {
+            color: #8c8c8c;
+        }
+    }
+    &__decr {
+        margin-top: 20px;
+        color: #8c8c8c;
+        font-size: 13px;
+    }
+}
+
+.payture-card {
+    border: solid 1px #d9d9d9;
+    background-color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    &__name {
+        font-size: 11px;
+        color: #636363;
+        font-weight: 500;
+    }
+    &__number {
+        border-bottom: solid 1px #d9d9d9;
+    }
+    &__input-number {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        justify-content: space-between;
+    }
+    &__input {
+        height: 22px;
+        color: #333333;
+        font-size: 18px;
+        font-weight: 400;
+        border: none;
+        outline: none;
+        padding: 0 0;
+        width: 175px;
+        &::placeholder {
+            color: #b2acac;
+        }
+    }
+    &__imgs {
+        display: flex;
+        img {
+            display: block;
+            height: 12px;
+            width: auto;
+            &:not(:last-child) {
+                margin-right: 7px;
+            }
+        }
+    }
+    &__bottom {
+        display: flex;
+    }
+    &__validity {
+        margin-top: 10px;
+        width: 50%;
+        border-right: solid 1px #d9d9d9;
+    }
+    &__validity-input {
+        height: 22px;
+        color: #333333;
+        font-size: 18px;
+        font-weight: 400;
+        border: none;
+        outline: none;
+        padding: 0;
+        margin-top: 10px;
+        width: 60px;
+        &::placeholder {
+            color: #b2acac;
+        }
+    }
+    &__ver-code {
+        margin-top: 10px;
+        padding-left: 14px;
+        width: 50%;
+    }
+    &__ver-input {
+        padding-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    &__inp {
+        height: 22px;
+        color: #333333;
+        font-size: 18px;
+        font-weight: 400;
+        border: none;
+        outline: none;
+        padding: 0;
+        width: 60px;
+        &::placeholder {
+            color: #b2acac;
+        }
+    }
+}

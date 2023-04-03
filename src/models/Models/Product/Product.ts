@@ -15,4 +15,5 @@ export interface IProduct {
     category: Category,
     brandid: number,
     brand: Brand,
+    _id?: string
 }
