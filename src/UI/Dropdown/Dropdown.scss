@@ -1,0 +1,50 @@
+@import "../../styles/variables.scss";
+
+.dropdown {
+    border: 1px solid $primary-10;
+    overflow: hidden;
+    border-radius: 0.4rem;
+    transition: max-height 0.3s linear;
+    z-index: 1;
+    &__current-value {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 8px;
+        cursor: pointer;
+        span {
+            font-size: 12px;
+        }
+    }
+    &__svg {
+        transition: transform 0.3s linear;
+    }
+    &.active {
+        & .dropdown__svg {
+            transform: rotate(180deg);
+        }
+    }
+    &__list {
+        transition: all 0.3s linear;
+    }
+    &__item {
+        background-color: #fff;
+        padding: 0 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        border-top: 1px solid $primary-10;
+        color: $primary-40;
+        transition: all 0.3s linear;
+        &:hover {
+            background-color: $background;
+            color: #000;
+        }
+        &.active {
+            background-color: $background;
+            color: #000;
+        }
+    }
+}

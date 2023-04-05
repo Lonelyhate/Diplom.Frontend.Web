@@ -1,11 +1,11 @@
-import React, { FC, ReactNode, useEffect } from "react";
-import "./Modal.scss";
-import cn from "classnames";
+import React, { FC, ReactNode, useEffect } from 'react';
+import './Modal.scss';
+import cn from 'classnames';
 
 interface IModal {
     visable: boolean;
     setVisable: (visable: boolean) => void;
-    animationContent?: "downFrom";
+    animationContent?: 'downFrom';
     widthContent?: string | number;
     heightContent?: string | number;
     maxWidth?: string | number;
@@ -18,7 +18,7 @@ const Modal: FC<IModal & { children?: ReactNode }> = ({
     setVisable,
     visable,
     children,
-    animationContent = "downFrom",
+    animationContent = 'downFrom',
     widthContent,
     heightContent,
     maxWidth,
@@ -29,9 +29,9 @@ const Modal: FC<IModal & { children?: ReactNode }> = ({
     useEffect(() => {
         const handleScrollOf = () => {
             if (visable) {
-                document.body.style.overflow = "hidden";
+                document.body.style.overflow = 'hidden';
             } else {
-                document.body.style.overflow = "";
+                document.body.style.overflow = '';
             }
         };
         handleScrollOf();
@@ -39,15 +39,20 @@ const Modal: FC<IModal & { children?: ReactNode }> = ({
         return handleScrollOf();
     }, [visable]);
 
+    const onClickModal = () => {
+        setVisable(false);
+    };
+
     return (
         <div
-            onClick={() => setVisable(false)}
-            className={cn("modal", {
+            id='modal'
+            onClick={onClickModal}
+            className={cn('modal', {
                 active: visable
             })}
         >
             <div
-                onClick={(e) => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
                 style={{
                     width: widthContent,
                     height: heightContent,
@@ -56,8 +61,8 @@ const Modal: FC<IModal & { children?: ReactNode }> = ({
                     padding,
                     borderRadius
                 }}
-                className={cn("modal__content", {
-                    down: animationContent == "downFrom",
+                className={cn('modal__content', {
+                    down: animationContent == 'downFrom',
                     active: visable
                 })}
             >

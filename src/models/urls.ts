@@ -10,7 +10,11 @@ export const BLOG_URL = HOME_URL + 'news';
 export const PRODUCT_PAGE_URL = HOME_URL + 'product';
 export const CHECKOUT_PAGE_URL = HOME_URL + "checkout";
 export const PAYTURE_PAGE_URL = HOME_URL + "payment"
+export const CATALOG_PAGE_URL = HOME_URL + "catalog"
 export const ORDER_SUCCESS_URL = HOME_URL + "orders/success"
+
+export const NEWS_PAGE_URL = CATALOG_PAGE_URL + "/news"
+export const ACCESSORIES_PAGE_URL = CATALOG_PAGE_URL + "/accessories"
 
 export const FAQ_URL = HOME_URL + 'faq';
 export const SHIPPING_FAQ_URL = FAQ_URL + '/shipping_faq';
@@ -41,4 +45,7 @@ export class Urls {
     readonly Checkout: string = CHECKOUT_PAGE_URL;
     readonly Payture: string = PAYTURE_PAGE_URL;
     readonly OrdersSuccess: string = ORDER_SUCCESS_URL;
+    readonly Catalog: string = CATALOG_PAGE_URL;
+    readonly Accessories: string = ACCESSORIES_PAGE_URL;
+    readonly News: string = NEWS_PAGE_URL;
 }

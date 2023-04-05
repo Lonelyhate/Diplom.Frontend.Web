@@ -28,7 +28,39 @@
             color: $primary-40;
             background-color: transparent;
             user-select: none;
-            
+        }
+        &.active {
+            background-color: $primary-5;
+        }
+    }
+    &__content {
+        margin-top: 4.4rem;
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 6.4rem;
+    }
+    &__column {
+        display: flex;
+        gap: 1.6rem;
+        width: 25%;
+    }
+    &__title {
+        font-size: 2.4rem;
+        line-height: 2.4rem;
+        font-weight: 400;
+    }
+    &__list {
+        margin-top: 0.8rem;
+    }
+    &__brand-item {
+        font-size: 1.4rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        &:hover {
+            color: $primary-40;
+        }
+        &:not(:last-child) {
+            margin-bottom: 1.4rem;
         }
     }
 }

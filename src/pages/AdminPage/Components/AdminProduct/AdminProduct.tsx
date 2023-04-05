@@ -9,7 +9,6 @@ import "./AdminProduct.scss";
 const AdminProduct: FC = () => {
   const [visableAddProduct, setVisableProduct] = useState<boolean>(false);
 
-
   return (
     <section className='admin-product'>
       <div className='admin-product__container container'>

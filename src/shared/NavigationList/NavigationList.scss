@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.navigation-list {
+    display: flex;
+    align-items: center;
+    &__link {
+        display: block;
+        color: $primary-40;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
+        span {
+            margin-right: 7px;
+            margin-left: 4px;
+        }
+        &:hover {
+            color: #000;
+        }
+        &.current {
+            color: #000;
+        }
+    }
+}

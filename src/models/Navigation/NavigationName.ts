@@ -8,4 +8,6 @@ export class NavigationName {
     Admin = "Админ-панель"
     AdminProduct = "Товар"
     AdminBlog = "Блог"
+    Accessories = "Аксессуары"
+    News = "Новинки"
 }

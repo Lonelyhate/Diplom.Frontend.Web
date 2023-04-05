@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+.catalog-page {
+    background-color: $background;
+    &__container {
+        position: relative;
+    }
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        padding: 3.5rem 0;
+    }
+    &__params {
+        position: absolute;
+        right: 0;
+        top: 25px;
+        display: flex;
+    }
+    &__content {
+        display: flex;
+    }
+}

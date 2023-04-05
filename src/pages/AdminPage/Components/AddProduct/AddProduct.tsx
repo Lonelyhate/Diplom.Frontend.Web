@@ -19,6 +19,8 @@ import axios from 'axios';
 import ProductApi from '../../../../models/API/ProductApi/ProductApi';
 import { fetchProductCreate } from '../../../../store/reducers/Product/Creators/ProductCreator';
 import Gender, { GenderValue } from '../../../../models/Models/Product/Gender';
+import Modal from '../../../../UI/Modal/Modal';
+import AddBrand from '../AddBrand/AddBrand';
 
 interface IAddProduct {
     visable: boolean;
@@ -33,6 +35,7 @@ type eventClick = MouseEvent & {
 
 const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
     const dispatch = useAppDispatch();
+    const [modalAddBrand, setModalAddBrand] = useState<boolean>(false);
     const { brands } = useAppSelector(state => state.brandReducer);
     const { categories } = useAppSelector(state => state.categoryReducer);
     const [name, setName] = useState<string>('');
@@ -52,19 +55,17 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
 
         const handleClickOutside = (event: MouseEvent) => {
             const _event = event as eventClick;
-            if (
-                contentRef.current &&
-                !event.composedPath().includes(contentRef.current) &&
-                !(_event.target.id == 'addProduct')
-            ) {
+            if (contentRef.current && !event.composedPath().includes(contentRef.current) && !(_event.target.id == 'addProduct')) {
+                if (_event.target.id == "modal") {
+                    return;
+                }
                 closeModal();
             }
         };
 
         document.body.addEventListener('click', handleClickOutside);
 
-        return () =>
-            document.body.removeEventListener('click', handleClickOutside);
+        return () => document.body.removeEventListener('click', handleClickOutside);
     }, []);
 
     const updloadImages = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,14 +73,7 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
     };
 
     const deletedImage = (lastModified: number, name: string) => {
-        setImages([
-            ...images.filter(
-                (item, i) =>
-                    item.lastModified !== lastModified &&
-                    item.name !== name &&
-                    i === i
-            )
-        ]);
+        setImages([...images.filter((item, i) => item.lastModified !== lastModified && item.name !== name && i === i)]);
     };
 
     const sendRequest = async () => {
@@ -109,15 +103,12 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
                 })}
             >
                 <TitleMain text='Добавить товар' />
-                <InputMain
-                    labelText='Название'
-                    placeholder='Введите название'
-                    value={name}
-                    setValue={setName}
-                />
+                <InputMain labelText='Название' placeholder='Введите название' value={name} setValue={setName} />
                 <h4 className='add-product__subtitle'>Бренд</h4>
                 <div className='add-product__select'>
                     <Select
+                        setActiveNewElement={() => {setModalAddBrand(true)}}
+                        addNewElement={true}
                         placeholder='Выберите бренд'
                         items={brands}
                         currentElement={brand}
@@ -126,75 +117,29 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
                 </div>
                 <h4 className='add-product__subtitle'>Пол</h4>
                 <div className='add-product__select'>
-                    <Select
-                        placeholder='Выберите пол'
-                        items={Gender.Array}
-                        currentElement={gender}
-                        setCurrentElement={setGender}
-                    />
+                    <Select placeholder='Выберите пол' items={Gender.Array} currentElement={gender} setCurrentElement={setGender} />
                 </div>
                 <h4 className='add-product__subtitle'>Категория</h4>
                 <div className='add-product__select'>
-                    <Select
-                        placeholder='Выберите категорию'
-                        items={categories}
-                        setCurrentElement={setCategory}
-                        currentElement={category}
-                    />
+                    <Select placeholder='Выберите категорию' items={categories} setCurrentElement={setCategory} currentElement={category} />
                 </div>
                 {category && (
                     <>
                         <h4 className='add-product__subtitle'>Размеры</h4>
-                        <AddSizes
-                            setSizes={setSizes}
-                            category={category?.name}
-                        />
+                        <AddSizes setSizes={setSizes} category={category?.name} />
                     </>
                 )}
-                <InputMain
-                    marginTop={15}
-                    labelText='Цена'
-                    placeholder='Введите цену'
-                    setValue={setPrice}
-                    value={price}
-                />
-                <InputMain
-                    marginTop={15}
-                    labelText='Код товара'
-                    placeholder='Введите код'
-                    setValue={setCodProduct}
-                    value={codeProduct}
-                />
-                <InputMain
-                    marginTop={15}
-                    labelText='Описание'
-                    placeholder='Введите описание'
-                    setValue={setDescr}
-                    value={descr}
-                />
-                <label
-                    className='add-product__label-img label-img'
-                    htmlFor='images'
-                >
-                    <span className='label-img__text'>
-                        + Загрузить изображение
-                    </span>
-                    <input
-                        className='label-img__input'
-                        id='images'
-                        type='file'
-                        accept='image/*'
-                        onChange={updloadImages}
-                    />
+                <InputMain marginTop={15} labelText='Цена' placeholder='Введите цену' setValue={setPrice} value={price} />
+                <InputMain marginTop={15} labelText='Код товара' placeholder='Введите код' setValue={setCodProduct} value={codeProduct} />
+                <InputMain marginTop={15} labelText='Описание' placeholder='Введите описание' setValue={setDescr} value={descr} />
+                <label className='add-product__label-img label-img' htmlFor='images'>
+                    <span className='label-img__text'>+ Загрузить изображение</span>
+                    <input className='label-img__input' id='images' type='file' accept='image/*' onChange={updloadImages} />
                 </label>
                 <ul className='add-product__images images'>
                     {images.map((item, i) => (
                         <li key={i} className='images__item'>
-                            <span className='images__name'>
-                                {item.name.length < 30
-                                    ? item.name
-                                    : item.name.substring(0, 30) + '...'}
-                            </span>
+                            <span className='images__name'>{item.name.length < 30 ? item.name : item.name.substring(0, 30) + '...'}</span>
                             <button
                                 onClick={() => {
                                     deletedImage(item.lastModified, item.name);
@@ -214,13 +159,12 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
                             sendRequest();
                         }}
                     />
-                    <ButtonMain
-                        backGround='gray'
-                        text={'Отмена'}
-                        onClick={closeModal}
-                    />
+                    <ButtonMain backGround='gray' text={'Отмена'} onClick={closeModal} />
                 </div>
             </div>
+            <Modal borderRadius={"0.4rem"} setVisable={setModalAddBrand} visable={modalAddBrand}>
+                <AddBrand setClose={setModalAddBrand} />
+            </Modal>
         </div>
     );
 };

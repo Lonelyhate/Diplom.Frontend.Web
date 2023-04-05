@@ -16,7 +16,7 @@ interface IButtonMain {
     widthBorder?: number;
     marginTop?: string;
     disabled?: boolean;
-    location?: 'center';
+    location?: 'center' | 'right';
     marginRight?: number | string;
     ref?: any;
     id?: string;
@@ -73,15 +73,12 @@ const ButtonMain: FC<IButtonMain> = ({
                 primary: backGround == 'primary',
                 gray: backGround == 'gray',
                 loading: isLoading == true,
-                center: location == 'center'
+                center: location == 'center',
+                right: location == 'right'
             })}
         >
             {isLoading ? (
-                <Spinner
-                    color={'#000'}
-                    size={sizeSpinner}
-                    widthBorder={widthBorder}
-                />
+                <Spinner color={'#000'} size={sizeSpinner} widthBorder={widthBorder} />
             ) : Array.isArray(text) ? (
                 text.map(item => <span key={item}>{item}</span>)
             ) : typeof text == 'function' ? (
