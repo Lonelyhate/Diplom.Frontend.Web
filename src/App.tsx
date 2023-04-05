@@ -13,6 +13,7 @@ import { setModalProductVisable } from './store/reducers/Product/Creators/Produc
 import { useLocation } from 'react-router-dom';
 import { fetchOrdersByUser } from './store/reducers/Cart/Creators/OrderCreator';
 import { fetchDiscountCreate, fetchDiscountDelete, fetchDiscountGetById } from './store/reducers/User/creators/DiscountCreator';
+import { fetchBrandsAll } from './store/reducers/Product/Creators/BrandCreator';
 
 function App() {
     const dispatch = useAppDispatch();
@@ -27,6 +28,7 @@ function App() {
 
     useEffect(() => {
         dispatch(fetchUserAuth());
+        dispatch(fetchBrandsAll());
         dispatch(fetchFavoritesAll());
         dispatch(fetchOrdersByUser());
         dispatch(fetchDiscountCreate());
@@ -36,7 +38,7 @@ function App() {
         if (isAuth && currentUser != null && discount == null) {
             dispatch(fetchDiscountCreate());
         } else {
-            dispatch(fetchDiscountDelete())
+            dispatch(fetchDiscountDelete());
         }
     }, [currentUser]);
 

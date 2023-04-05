@@ -12,6 +12,7 @@ import {
     ADMIN_BLOG_URL,
     ADMIN_PRODUCT_URL,
     ADMIN_URL,
+    BRANDS_URL,
     CHECKOUT_PAGE_URL,
     DISCOUNT_URL,
     FAVORITES_URL,
@@ -28,6 +29,7 @@ import AddressPage from './pages/AddressPage/AddressPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import Payture from './shared/Payture/Payture';
 import OrderSuccessPage from './pages/OrderSuccessPage/OrderSuccessPage';
+import BrandsPage from './pages/BrandsPage/BrandsPage';
 
 const RoutesComponent: FC = () => {
     return (
@@ -45,6 +47,7 @@ const RoutesComponent: FC = () => {
             <Route path={CHECKOUT_PAGE_URL} element={<CheckoutPage />} />
             <Route path={`${PAYTURE_PAGE_URL}/:type`} element={<Payture />} />
             <Route path={ORDER_SUCCESS_URL} element={<OrderSuccessPage />} />
+            <Route path={BRANDS_URL} element={<BrandsPage />} />
         </Routes>
     );
 };

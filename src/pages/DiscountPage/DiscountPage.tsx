@@ -7,7 +7,7 @@ const DiscountPage: FC = () => {
   return (
     <div className='discount-page'>
       <div className='discount-page__container container'>
-        <DiscountCard />
+        <DiscountCard isTitle={true} width={540} />
         <AsideAccount />
       </div>
     </div>

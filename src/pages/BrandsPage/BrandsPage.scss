@@ -1,0 +1,34 @@
+@import "../../styles/variables.scss";
+
+.brand-page{
+    margin-top: 20px;
+    &__header {
+    
+    }
+    &__alphabet {
+        padding: 1.6rem 0;
+        display: flex;
+        border-bottom: 1px solid $primary-10;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    &__alph {
+        font-size: 2.4rem;
+        line-height: 2.4rem;
+        padding: 0.8rem 1.2rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border: none;
+        background-color: transparent;
+        &:hover {
+            background-color: $primary-5;
+        }
+        &.empty {
+            cursor: no-drop;
+            color: $primary-40;
+            background-color: transparent;
+            user-select: none;
+            
+        }
+    }
+}

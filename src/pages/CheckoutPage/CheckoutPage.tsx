@@ -16,9 +16,11 @@ import { IOrderModel } from '../../models/Models/Cart/OrderModel';
 import { fetchMakeOrder } from '../../store/reducers/Cart/Creators/OrderCreator';
 import { fetchDeleteAllProductsCart } from '../../store/reducers/Cart/Creators/CartCreator';
 import { fetchDiscountUpdate } from '../../store/reducers/User/creators/DiscountCreator';
+import DiscountCard from '../DiscountPage/components/DiscountCard/DiscountCard';
 
 const CheckoutPage: FC = () => {
     const dispatch = useAppDispatch();
+    const {discount} = useAppSelector(state => state.discountReducer);
     const [firstname, setFirstname] = useState<string>('');
     const [lastname, setLastname] = useState<string>('');
     const { currentUser } = useAppSelector(state => state.userReducer);
@@ -41,10 +43,10 @@ const CheckoutPage: FC = () => {
     }, [currentUser?.firstname, currentUser?.lastname]);
 
     useEffect(() => {
-        if (cart) {
-            setTotalCost(cart.amount + activeTypeDelivery.price);
+        if (cart && discount) {
+            setTotalCost((cart.amount + activeTypeDelivery.price) * (1 - discount?.sizeDscount! / 100));
         }
-    }, [cart?.amount, activeTypeDelivery.price]);
+    }, [cart?.amount, activeTypeDelivery.price, discount?.sizeDscount]);
 
     const onClickDeliveryMethod = (item: deliveryMethodTypeItem) => {
         setActiveTypeDelivery(item);
@@ -86,7 +88,7 @@ const CheckoutPage: FC = () => {
             numberPhone: currentUser!.phone!
         };
         navigate(ORDER_SUCCESS_URL);
-        dispatch(fetchDiscountUpdate(cart?.amount!));
+        dispatch(fetchDiscountUpdate(totalCost));
         dispatch(fetchMakeOrder(request));
         dispatch(fetchDeleteAllProductsCart());
     };
@@ -201,6 +203,7 @@ const CheckoutPage: FC = () => {
                                 <div className='checkout-right__total'>{totalCost.toLocaleString()} ₽</div>
                             </div>
                         </div>
+                        <DiscountCard/>
                     </div>
                 </div>
             </div>
