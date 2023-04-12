@@ -10,7 +10,7 @@ export enum GenderName {
     Unisex = "Унисекс"
 }
 
-type GenderArrayType = {name: GenderName, value: GenderValue}
+export type GenderArrayType = {name: GenderName, value: GenderValue}
 
 class Gender {
     static readonly ManValue: number = GenderValue.Man;

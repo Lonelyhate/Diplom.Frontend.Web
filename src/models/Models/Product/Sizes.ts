@@ -20,3 +20,5 @@ export const sizes: size[] = [
     { EU: 46.5, RU: 45, UK: 11.5, US: 13.5, JP: 31.5 },
     { EU: 47.5, RU: 46, UK: 12, US: 14.5, JP: 32.5 }
 ];
+
+export const sizesClothes: string[] = ['XXXS', 'XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', "ONE SIZE"];

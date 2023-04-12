@@ -14,6 +14,7 @@ import { useLocation } from 'react-router-dom';
 import { fetchOrdersByUser } from './store/reducers/Cart/Creators/OrderCreator';
 import { fetchDiscountCreate, fetchDiscountDelete, fetchDiscountGetById } from './store/reducers/User/creators/DiscountCreator';
 import { fetchBrandsAll } from './store/reducers/Product/Creators/BrandCreator';
+import { fetchCategoriesAll } from './store/reducers/Product/Creators/CategoryCreator';
 
 function App() {
     const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ function App() {
         dispatch(fetchFavoritesAll());
         dispatch(fetchOrdersByUser());
         dispatch(fetchDiscountCreate());
+        dispatch(fetchCategoriesAll());
     }, []);
 
     useEffect(() => {
