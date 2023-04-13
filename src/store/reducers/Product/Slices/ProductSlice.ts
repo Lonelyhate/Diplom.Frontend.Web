@@ -1,8 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IProduct } from '../../../../models/Models/Product/Product';
+import { IProduct, IProductGetAllResponseModel } from '../../../../models/Models/Product/Product';
+
+type ProductsType = {
+    priceMin?: number;
+    priceMax?: number;
+    count?: number;
+    products: IProduct[];
+    isLoading: boolean;
+    error: '';
+};
 
 interface ProductState {
     products: IProduct[];
+    productsNew: ProductsType | null;
     product: IProduct | null;
     isLoading: boolean;
     error: string;
@@ -12,6 +22,14 @@ interface ProductState {
 
 const initialState: ProductState = {
     products: [],
+    productsNew: {
+        error: '',
+        isLoading: false,
+        products: [],
+        count: 0,
+        priceMax: 0,
+        priceMin: 0
+    },
     product: null,
     error: '',
     isLoading: false,
@@ -35,9 +53,9 @@ export const productSlice = createSlice({
             state.products = [...state.products, action.payload];
             state.isLoading = false;
         },
-        productGetAll(state, action: PayloadAction<IProduct[]>) {
+        productGetAll(state, action: PayloadAction<IProductGetAllResponseModel>) {
             state.error = '';
-            state.products = action.payload;
+            state.products = action.payload.products;
             state.isLoading = false;
         },
         productGetById(state, action: PayloadAction<IProduct>) {
@@ -51,6 +69,16 @@ export const productSlice = createSlice({
         },
         productSetVisableModal(state, action: PayloadAction<boolean>) {
             state.visableModalProduct = action.payload;
+        },
+        productNewLoading(state) {
+            state.productsNew!.isLoading = true;
+        },
+        productsNewAll(state, action: PayloadAction<IProductGetAllResponseModel>) {
+            state.productsNew!.count = action.payload.count;
+            state.productsNew!.priceMin = action.payload.count;
+            state.productsNew!.priceMax = action.payload.count;
+            state.productsNew!.products = action.payload.products;
+            state.productsNew!.isLoading = false;
         }
     }
 });

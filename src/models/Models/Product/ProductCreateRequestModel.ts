@@ -7,4 +7,5 @@ export interface IProductCreateRequestModel {
     codeProduct: string;
     description: string;
     images: File[];
+    gender: number;
 }

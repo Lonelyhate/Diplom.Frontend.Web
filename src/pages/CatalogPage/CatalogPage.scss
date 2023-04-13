@@ -12,7 +12,8 @@
     }
     &__params {
         position: absolute;
-        right: 0;
+        z-index: 5;
+        right: 25px;
         top: 25px;
         display: flex;
     }

@@ -45,7 +45,7 @@ const Filter: FC = () => {
             <h3 className='filter__subtitle'>Пол</h3>
             <ul className='filter__genders'>
                 {Gender.Array.map(item => (
-                    <li className='filter__gender'>
+                    <li key={item.value} className='filter__gender'>
                         <CheckboxMain setValues={setGenders} values={genders} value={item.value} text={item.name} />
                     </li>
                 ))}
@@ -53,7 +53,7 @@ const Filter: FC = () => {
             <h3 className='filter__subtitle'>Категория</h3>
             <ul className='filter__categories'>
                 {categories.map(item => (
-                    <li className='filter__category'>
+                    <li key={item.id} className='filter__category'>
                         <CheckboxMain value={item.id} setValues={setCategoriesAr} text={item.name} values={categoriesAr} />
                     </li>
                 ))}
@@ -61,7 +61,7 @@ const Filter: FC = () => {
             <h3 className='filter__subtitle'>Размер</h3>
             <ul className='filter__sizes'>
                 {sizes.map(item => (
-                    <li className='filter__size'>
+                    <li key={item.EU} className='filter__size'>
                         <CheckboxMain value={item.EU} setValues={setSizesAr} text={item.EU.toString()} values={sizesAr} />
                     </li>
                 ))}
@@ -74,7 +74,7 @@ const Filter: FC = () => {
             <h3 className='filter__subtitle'>Бренд</h3>
             <ul className='filter__brands'>
                 {brands.map(item => (
-                    <li className='filter__brand'>
+                    <li key={item.id} className='filter__brand'>
                         <CheckboxMain value={item.id} setValues={setBrandsAr} text={item.name} values={brandsAr} />
                     </li>
                 ))}

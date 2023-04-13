@@ -17,3 +17,10 @@ export interface IProduct {
     brand: Brand,
     _id?: string
 }
+
+export interface IProductGetAllResponseModel {
+    price_min: number,
+    price_max: number,
+    count: number,
+    products: IProduct[]
+}

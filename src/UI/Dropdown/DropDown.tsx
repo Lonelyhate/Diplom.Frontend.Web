@@ -13,9 +13,19 @@ interface IDropDown {
     height?: number;
     marginRight?: number | string;
     stringLength?: number;
+    onClickFunc?: () => void;
 }
 
-const DropDown: FC<IDropDown> = ({ items, currentValue, setCurrentValue, width = 168, height = 32, marginRight, stringLength = 30 }) => {
+const DropDown: FC<IDropDown> = ({
+    items,
+    currentValue,
+    setCurrentValue,
+    width = 168,
+    height = 32,
+    marginRight,
+    stringLength = 30,
+    onClickFunc
+}) => {
     const [listActive, setListActive] = useState<boolean>(false);
     const heightList = (height + 2) * items.length;
     const ref = useRef(null);
@@ -35,6 +45,7 @@ const DropDown: FC<IDropDown> = ({ items, currentValue, setCurrentValue, width =
     const onClickItem = (item: dropDownItem) => {
         setCurrentValue(item);
         setListActive(false);
+        onClickFunc && onClickFunc();
     };
 
     return (
@@ -46,7 +57,9 @@ const DropDown: FC<IDropDown> = ({ items, currentValue, setCurrentValue, width =
             })}
         >
             <div onClick={() => setListActive(!listActive)} style={{ height }} className='dropdown__current-value'>
-                <span>{currentValue.name.length > stringLength ? currentValue.name.substring(0, stringLength) + "..." : currentValue.name}</span>
+                <span>
+                    {currentValue.name.length > stringLength ? currentValue.name.substring(0, stringLength) + '...' : currentValue.name}
+                </span>
                 <BsChevronDown className='dropdown__svg' size={12} />
             </div>
             <ul style={{ maxHeight: listActive ? heightList : 0 }} className='dropdown__list'>

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import NavigationList from '../../shared/NavigationList/NavigationList';
 import { dropDownItem, linkItem } from '../../models/types';
 import { ACCESSORIES_PAGE_URL, HOME_URL } from '../../models/urls';
@@ -7,6 +7,9 @@ import DropDown from '../../UI/Dropdown/DropDown';
 import './CatalogPage.scss';
 import CatalogList from './components/CatalogList/CatalogList';
 import Filter from './components/Filter/Filter';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchNewProducts } from '../../store/reducers/Product/Creators/ProductCreator';
+import { IProductsFilterRequestModel } from '../../models/Models/Product/ProductsFilterRequsetModel';
 
 const CatalogPage: FC = () => {
     const dropDownCountItems: dropDownItem[] = [
@@ -21,6 +24,8 @@ const CatalogPage: FC = () => {
         { name: 'Сначала старые товары', value: '3' },
         { name: 'Сначала новые товары', value: '4' }
     ];
+    const dispatch = useAppDispatch();
+    const { productsNew } = useAppSelector(state => state.productReducer);
     const [countItems, setCountItems] = useState<dropDownItem>(dropDownCountItems[0]);
     const [sort, setSort] = useState<dropDownItem>(dropDownSortItems[0]);
     const category = useParams<{ category: string }>().category;
@@ -39,6 +44,18 @@ const CatalogPage: FC = () => {
             break;
     }
 
+    useEffect(() => {
+        const requset: IProductsFilterRequestModel = {};
+        dispatch(fetchNewProducts(requset));
+    }, []);
+
+    const onClickSortSet = () => {
+        const request: IProductsFilterRequestModel = {
+            sort: sort.value
+        };
+        dispatch(fetchNewProducts(request));
+    };
+
     return (
         <div className='catalog-page'>
             <div className='catalog-page__container container'>
@@ -52,12 +69,18 @@ const CatalogPage: FC = () => {
                             items={dropDownCountItems}
                             setCurrentValue={setCountItems}
                         />
-                        <DropDown stringLength={19} items={dropDownSortItems} currentValue={sort} setCurrentValue={setSort} />
+                        <DropDown
+                            stringLength={19}
+                            items={dropDownSortItems}
+                            currentValue={sort}
+                            setCurrentValue={setSort}
+                            onClickFunc={onClickSortSet}
+                        />
                     </div>
                 </div>
                 <div className='catalog-page__content'>
-                    <Filter/>
-                    <CatalogList />
+                    <Filter />
+                    {productsNew?.products && <CatalogList products={productsNew?.products} />}
                 </div>
             </div>
         </div>

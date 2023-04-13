@@ -18,7 +18,7 @@ import { IProductCreateRequestModel } from '../../../../models/Models/Product/Pr
 import axios from 'axios';
 import ProductApi from '../../../../models/API/ProductApi/ProductApi';
 import { fetchProductCreate } from '../../../../store/reducers/Product/Creators/ProductCreator';
-import Gender, { GenderValue } from '../../../../models/Models/Product/Gender';
+import Gender, { GenderArrayType, GenderValue } from '../../../../models/Models/Product/Gender';
 import Modal from '../../../../UI/Modal/Modal';
 import AddBrand from '../AddBrand/AddBrand';
 
@@ -46,7 +46,7 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
     const [descr, setDescr] = useState<string>('');
     const [images, setImages] = useState<File[]>([]);
     const [sizes, setSizes] = useState<any>([]);
-    const [gender, setGender] = useState<GenderValue | null>(null);
+    const [gender, setGender] = useState<GenderArrayType>(Gender.Array[0]);
     const contentRef = useRef(null);
 
     useEffect(() => {
@@ -77,6 +77,11 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
     };
 
     const sendRequest = async () => {
+        console.log(gender)
+        if (sizes && sizes.length == 0)
+        {
+            setSizes(["ONE SIZE"])
+        }
         const requestModel: IProductCreateRequestModel = {
             name: name,
             brandId: brand!.id,
@@ -85,6 +90,7 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
             codeProduct: codeProduct,
             description: descr,
             price: price,
+            gender: gender.value,
             images: images
         };
         dispatch(fetchProductCreate(requestModel));
