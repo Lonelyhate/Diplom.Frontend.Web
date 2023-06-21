@@ -9,7 +9,19 @@ import { IAxiosError } from '../../AxiosError';
 class ProductApi extends BaseAPI {
     BaseUrl = 'https://localhost:7081/api/Product/';
 
-    public async GetAllProduct(orderBy: string | 'desc' = '', take: string = '', newProducts: boolean = false, sort?: string) {
+    public async GetAllProduct(
+        orderBy: string | 'desc' = '',
+        take: string = '',
+        newProducts: boolean = false,
+        sort?: string,
+        minPrice?: number,
+        maxPrice?: number,
+        gender?: string,
+        category?: string,
+        sizes?: string,
+        brands?: string,
+        search?: string
+    ) {
         let url = 'getall';
         if (orderBy || take || newProducts || sort) {
             url = url + '?';
@@ -25,6 +37,27 @@ class ProductApi extends BaseAPI {
             if (sort) {
                 url += '&sort=' + sort;
             }
+            if (minPrice) {
+                url += '&priceMin=' + minPrice;
+            }
+            if (maxPrice) {
+                url += '&priceMax=' + maxPrice;
+            }
+            if (gender) {
+                url += '&gender=' + gender;
+            }
+            if (category) {
+                url += '&category=' + category;
+            }
+            if (sizes) {
+                url += '&sizes=' + sizes;
+            }
+            if (brands) {
+                url += '&brands=' + brands;
+            }
+            if (search) {
+                url += '&search=' + search;
+            }
         }
 
         return await this.SendAsync<IProductGetAllResponseModel>({
@@ -34,7 +67,6 @@ class ProductApi extends BaseAPI {
     }
 
     public async CreateProductForm(request: IProductCreateRequestModel) {
-        console.log(request.gender);
         const formData = new FormData();
         formData.append('Name', request.name);
         formData.append('BrandId', request.brandId.toString());

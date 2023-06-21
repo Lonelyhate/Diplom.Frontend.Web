@@ -1,8 +1,11 @@
 @import "../../../../styles/variables.scss";
 
 .aside-admin {
-    min-width: 150px;
-    width: 150px;
+    min-width: 180px;
+    width: 180px;
+    background-color: $grayLight;
+    top: 0;
+    bottom: 0;
     &__link {
         background-color: $grayLight;
         text-decoration: none;
@@ -12,5 +15,16 @@
         align-items: center;
         justify-content: space-between;
         padding: 10px 20px;
+        border-bottom: 1px solid $primary-10;
+        transition: background-color 0.3s ease;
+        &:hover {
+            background-color: $primary-10;
+        }
+    }
+    &__header {
+        text-align: center;
+        padding: 10px 0;
+        font-size: 14px;
+        background-color: $primary-10;
     }
 }

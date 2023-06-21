@@ -1,9 +1,8 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
-.brand-page{
+.brand-page {
     margin-top: 20px;
     &__header {
-    
     }
     &__alphabet {
         padding: 1.6rem 0;
@@ -53,14 +52,17 @@
         margin-top: 0.8rem;
     }
     &__brand-item {
+        &:not(:last-child) {
+            margin-bottom: 1.4rem;
+        }
+    }
+    &__link {
         font-size: 1.4rem;
-        cursor: pointer;
+        text-decoration: none;
+        color: #000;
         transition: color 0.3s ease;
         &:hover {
             color: $primary-40;
-        }
-        &:not(:last-child) {
-            margin-bottom: 1.4rem;
         }
     }
 }

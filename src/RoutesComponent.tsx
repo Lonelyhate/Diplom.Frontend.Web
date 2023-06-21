@@ -40,8 +40,8 @@ const RoutesComponent: FC = () => {
             <Route path={ACCOUNT_URL} element={<AccountPage />} />
             <Route path={DISCOUNT_URL} element={<DiscountPage />} />
             <Route path={ORDERS_URL} element={<OrderPage />} />
-            <Route path={ADMIN_URL} element={<AdminPage />} />
-            <Route path={ADMIN_PRODUCT_URL} element={<AdminProduct />} />
+            
+            <Route path={ADMIN_URL} element={<AdminProduct />} />
             <Route path={ADMIN_BLOG_URL} element={<AdminBlog />} />
             <Route path={`${PRODUCT_PAGE_URL}/:id`} element={<ProductPage />} />
             <Route path={FAVORITES_URL} element={<FavortiesPage />} />

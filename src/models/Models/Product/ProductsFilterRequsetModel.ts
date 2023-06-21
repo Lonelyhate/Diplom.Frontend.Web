@@ -5,5 +5,6 @@ export interface IProductsFilterRequestModel {
     category?: string,
     sizes?: string,
     brands?: string,
-    sort?: string
+    sort?: string,
+    search?: string
 }

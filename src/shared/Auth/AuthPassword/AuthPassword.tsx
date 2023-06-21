@@ -38,6 +38,7 @@ const AuthPassword: FC<IAuthPassword> = ({
         state => state.userReducer
     );
     const [errorVisible, setErrorVisable] = useState<boolean>(false);
+    const [errorText, setErrorText] = useState<string>("")
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
 
     const userLogin = () => {
@@ -49,6 +50,11 @@ const AuthPassword: FC<IAuthPassword> = ({
 
     const userRegistration = () => {
         dispatch(fetchUserRegistration(login, password, passwordConfrim));
+        if (password !== passwordConfrim) {
+            setErrorText("Пароли не совпадают")
+            setPassword('')
+            setPasswordConfrim("")
+        }
         if (error != '') {
             setPassword('');
         }
@@ -86,7 +92,7 @@ const AuthPassword: FC<IAuthPassword> = ({
                             type={'password'}
                         />
                     )}
-                    <ValidationError text={error} />
+                    <ValidationError text={error || errorText} />
                 </>
             ) : (
                 <div className='auth-password__loading'>

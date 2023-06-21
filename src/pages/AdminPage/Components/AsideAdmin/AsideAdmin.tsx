@@ -7,6 +7,7 @@ const AsideAdmin: FC = () => {
   return (
     <aside className='aside-admin'>
       <ul className='aside-admin__list'>
+        <li className="aside-admin__item aside-admin__header" >Навигация</li>
         {AdminNavigation.NavigationArray.map((item) => (
           <li key={item.url} className='aside-admin__item'>
             <Link to={item.url} className='aside-admin__link'>

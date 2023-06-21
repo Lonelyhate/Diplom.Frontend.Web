@@ -39,7 +39,7 @@ export const fetchUserRegistration =
                 dispatch(userSlice.actions.userError(response.displayMessage!));
                 return;
             }
-            dispatch(userSlice.actions.userSuccess);
+            dispatch(userSlice.actions.userSuccess(response.data!));
             localStorage.setItem('token', response.data?.token!);
         } catch (e) {
             dispatch(userSlice.actions.userError('Error userLogin'));

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import cn from 'classnames';
 import { Brand } from '../../models/Models/Product/Brand';
 import { fetchBrandsAll } from '../../store/reducers/Product/Creators/BrandCreator';
+import { Link, useNavigate } from 'react-router-dom';
 
 const alphabet = [
     'A',
@@ -39,6 +40,7 @@ const BrandsPage: FC = () => {
     const dispatch = useAppDispatch();
     const [brandsMap, setBrandsMap] = useState<Map<string, Brand[]>>();
     const [letterActive, setLetterActive] = useState<string>('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         setMapFullBrands();
@@ -51,13 +53,13 @@ const BrandsPage: FC = () => {
     const onClickSetSort = (value: string) => {
         if (value == letterActive) {
             setMapFullBrands();
-            setLetterActive("")
+            setLetterActive('');
             return;
         }
         const brds: Brand[] = brands.filter(item => item.name[0].toUpperCase() == value);
         const tempBrandsMap = new Map<string, Brand[]>().set(value, brds);
         setBrandsMap(tempBrandsMap);
-        setLetterActive(value)
+        setLetterActive(value);
     };
 
     const setMapFullBrands = () => {
@@ -107,7 +109,9 @@ const BrandsPage: FC = () => {
                                     <ul className='brand-page__list'>
                                         {brandsMap!.get(item)!.map(el => (
                                             <li key={el.id} className='brand-page__brand-item'>
-                                                {el.name}
+                                                <Link className='brand-page__link' to={`brand-${el.id}`}>
+                                                    {el.name}
+                                                </Link>
                                             </li>
                                         ))}
                                     </ul>

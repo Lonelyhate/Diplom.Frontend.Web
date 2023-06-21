@@ -16,7 +16,7 @@ const PopularProducts: FC = () => {
   return (
     <section className='popular-products'>
       <TitleMain text='Популярные продукты' location='center' />
-      <ProductSlider items={products} />
+      <ProductSlider items={products!.products} />
     </section>
   );
 };

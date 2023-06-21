@@ -1,26 +1,30 @@
 @import '../../../styles/variables.scss';
 
-.nav{
-  height: 75px;
-  &__list{
-    display: flex;
-    height: 100%;
-    align-items: center;
-  }
-  &__item{
-    height: 100%;
-  }
-  &__link{
-    display: flex;
-    align-items: center;
-    height: 100%;
-    padding: 0 2rem;
-    font-size: 1.4rem;
-    text-decoration: none;
-    color: $mainTextColor;
-    transition: background-color 0.3s ease;
-    &:hover{
-      background-color: $grayLight;
+.nav {
+    height: 75px;
+    &__list {
+        display: flex;
+        height: 100%;
+        align-items: center;
     }
-  }
+    &__item {
+        height: 100%;
+        margin-right: 2px;
+    }
+    &__link {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 2rem;
+        font-size: 1.4rem;
+        text-decoration: none;
+        color: $mainTextColor;
+        transition: background-color 0.3s ease;
+        &:hover {
+            background-color: $grayLight;
+        }
+    }
+    .active {
+        background-color: $grayLight;
+    }
 }

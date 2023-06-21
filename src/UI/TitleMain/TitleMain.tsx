@@ -8,12 +8,13 @@ interface ITitleMain {
     style?: 'middle' | 'high';
     marginTop?: number | string;
     marginBottom?: number | string;
+    marginLeft?: number | string;
 }
 
-const TitleMain: FC<ITitleMain> = ({ text, location = 'left', style = 'middle', marginTop, marginBottom }) => {
+const TitleMain: FC<ITitleMain> = ({ text, location = 'left', style = 'middle', marginTop, marginBottom, marginLeft }) => {
     return (
         <h2
-            style={{ textAlign: location, marginTop, marginBottom }}
+            style={{ textAlign: location, marginTop, marginBottom, marginLeft }}
             className={cn('TitleMain', {
                 middle: style == 'middle',
                 high: style == 'high'

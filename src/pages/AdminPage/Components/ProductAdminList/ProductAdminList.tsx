@@ -16,7 +16,7 @@ const ProductAdminList: FC = () => {
 
   return (
     <ul className='product-list'>
-      {products.map((item) => (
+      {products?.products.map((item) => (
         <li key={item.id} className='product-list__item'>
           <ProductAdminItem product={item} />
         </li>

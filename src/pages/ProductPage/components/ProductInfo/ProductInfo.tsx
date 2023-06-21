@@ -11,11 +11,7 @@ import DeliveryInfo from '../DeliveryInfo/DeliveryInfo';
 import ReturnInfo from '../ReturnInfo/ReturnInfo';
 import { IProductCart } from '../../../../models/Models/Cart/CartModels';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
-import {
-    fetchCartAddProduct,
-    fetchMinusProductCart,
-    fetchPlusProductCart
-} from '../../../../store/reducers/Cart/Creators/CartCreator';
+import { fetchCartAddProduct, fetchMinusProductCart, fetchPlusProductCart } from '../../../../store/reducers/Cart/Creators/CartCreator';
 import { AiOutlineMinus } from 'react-icons/ai';
 import { AiOutlinePlus } from 'react-icons/ai';
 
@@ -26,17 +22,10 @@ interface IProductInfo {
     deleteFromFavorites: () => void;
 }
 
-const ProductInfo: FC<IProductInfo> = ({
-    product,
-    isFavorites,
-    addToFavorites,
-    deleteFromFavorites
-}) => {
-    const { isLoading, cart, isLoadingPlus, isLoadingMinus } = useAppSelector(
-        state => state.cartReducer
-    );
+const ProductInfo: FC<IProductInfo> = ({ product, isFavorites, addToFavorites, deleteFromFavorites }) => {
+    const { isLoading, cart, isLoadingPlus, isLoadingMinus } = useAppSelector(state => state.cartReducer);
     const sizes = product.sizes.split(';');
-    const [activeSize, setActiveSeize] = useState<string>(sizes[0]);
+    const [activeSize, setActiveSeize] = useState<string>(product.sizes.split(';')[0]);
     const [currentCount, setCurrentCount] = useState<number>(0);
     const [activeModalSize, setActiveModalSize] = useState<boolean>(false);
     const [activeDescr, setActiveDescr] = useState<boolean>(false);
@@ -63,17 +52,19 @@ const ProductInfo: FC<IProductInfo> = ({
     };
 
     const onPlusProduct = () => {
-        dispatch(fetchPlusProductCart(product.id, Number(activeSize)));
+        dispatch(fetchPlusProductCart(product.id, activeSize));
     };
 
     const onMinusProduct = () => {
-        dispatch(fetchMinusProductCart(product.id, Number(activeSize)));
+        dispatch(fetchMinusProductCart(product.id, activeSize));
     };
 
     useEffect(() => {
-        const currentProductSize = cart?.products.find(
-            p => p.id == product.id && p.size == activeSize
-        );
+        setActiveSeize(sizes[0]);
+    }, [sizes]);
+
+    useEffect(() => {
+        const currentProductSize = cart?.products.find(p => p.id == product.id && p.size == activeSize);
         if (currentProductSize) {
             setCurrentCount(currentProductSize.count!);
         } else {
@@ -87,9 +78,7 @@ const ProductInfo: FC<IProductInfo> = ({
             <h3 className='product-info__name'>
                 {product.category.name} x {product.name}
             </h3>
-            <span className='product-info__available-siezes'>
-                Доступные размеры
-            </span>
+            <span className='product-info__available-siezes'>Доступные размеры</span>
             <ul className='product-info__sizes'>
                 {sizes.map(item => (
                     <li key={item} className='product-info__item'>
@@ -98,7 +87,7 @@ const ProductInfo: FC<IProductInfo> = ({
                             width={68}
                             height={32}
                             backGround={activeSize == item ? 'primary' : 'gray'}
-                            text={item + ' EU'}
+                            text={!isNaN(Number(item)) ? item + ' EU' : item}
                             onClick={() => {
                                 setActiveSeize(item);
                             }}
@@ -106,15 +95,13 @@ const ProductInfo: FC<IProductInfo> = ({
                     </li>
                 ))}
             </ul>
-            <div className='product-info__price'>
-                {product.price.toLocaleString()} ₽
-            </div>
+            <div className='product-info__price'>{product.price.toLocaleString()} ₽</div>
             {currentCount == 0 || isLoading ? (
                 <ButtonMain
                     isLoading={isLoading}
                     maringBottom={'24px'}
                     height={56}
-                    text={['Добавить в корзину', activeSize + ' EU']}
+                    text={['Добавить в корзину', isNaN(Number(activeSize)) ? activeSize : activeSize + ' EU']}
                     onClick={sendProductToCart}
                 />
             ) : (
@@ -130,9 +117,7 @@ const ProductInfo: FC<IProductInfo> = ({
                         text={AiOutlineMinus}
                         isLoading={isLoadingMinus}
                     />
-                    <span className='product-info__count'>
-                        {currentCount} в корзине
-                    </span>
+                    <span className='product-info__count'>{currentCount} в корзине</span>
                     <ButtonMain
                         sizeSpinner={25}
                         widthBorder={3}
@@ -146,20 +131,8 @@ const ProductInfo: FC<IProductInfo> = ({
                     />
                 </div>
             )}
-            <ButtonMain
-                maringBottom={'1px'}
-                height={56}
-                backGround={'gray'}
-                text={'Заказ в один клик'}
-                onClick={() => {}}
-            />
-            <ButtonMain
-                maringBottom={'24px'}
-                height={56}
-                backGround={'gray'}
-                text={'Заказ по телефону'}
-                onClick={() => {}}
-            />
+            <ButtonMain maringBottom={'1px'} height={56} backGround={'gray'} text={'Заказ в один клик'} onClick={() => {}} />
+            <ButtonMain maringBottom={'24px'} height={56} backGround={'gray'} text={'Заказ по телефону'} onClick={() => {}} />
             <ul className='product-info__bottom-info bottom-info'>
                 <li className='bottom-info__item'>
                     <span className='bottom-info__top'>Артикул</span>
@@ -167,30 +140,16 @@ const ProductInfo: FC<IProductInfo> = ({
                 </li>
                 <li className='bottom-info__item'>
                     <span className='bottom-info__top'>Код товара</span>
-                    <span className='bottom-info__bot'>
-                        {product.codeProduct}
-                    </span>
+                    <span className='bottom-info__bot'>{product.codeProduct}</span>
                 </li>
                 <li className='bottom-info__item'>
-                    <button
-                        onClick={() => setActiveModalSize(true)}
-                        className='bottom-info__btn'
-                    >
+                    <button onClick={() => setActiveModalSize(true)} className='bottom-info__btn'>
                         Таблица размеров
                     </button>
                 </li>
                 <li className='bottom-info__item'>
-                    <button
-                        onClick={
-                            isFavorites ? deleteFromFavorites : addToFavorites
-                        }
-                        className='bottom-info__btn'
-                    >
-                        В избранное{' '}
-                        <IoStarSharp
-                            color={isFavorites ? '#000' : 'rgba(0, 0, 0, 0.4)'}
-                            size={25}
-                        />
+                    <button onClick={isFavorites ? deleteFromFavorites : addToFavorites} className='bottom-info__btn'>
+                        В избранное <IoStarSharp color={isFavorites ? '#000' : 'rgba(0, 0, 0, 0.4)'} size={25} />
                     </button>
                 </li>
                 <li
@@ -208,9 +167,7 @@ const ProductInfo: FC<IProductInfo> = ({
                     >
                         Описание <span></span>
                     </button>
-                    <p className='bottom-info__descr-text'>
-                        {product.description}
-                    </p>
+                    <p className='bottom-info__descr-text'>{product.description}</p>
                 </li>
                 <li className='bottom-info__item'>
                     <button
@@ -233,12 +190,7 @@ const ProductInfo: FC<IProductInfo> = ({
                     </button>
                 </li>
             </ul>
-            <ButtonMain
-                height={48}
-                backGround={'gray'}
-                text={'Больше от ' + product.brand.name}
-                onClick={() => {}}
-            />
+            <ButtonMain height={48} backGround={'gray'} text={'Больше от ' + product.brand.name} onClick={() => {}} />
             <Modal
                 minHeight={'auto'}
                 maxWidth={'100%'}

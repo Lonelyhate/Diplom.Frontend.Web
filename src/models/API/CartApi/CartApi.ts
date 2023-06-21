@@ -30,7 +30,7 @@ class CartAPI extends BaseAPI {
         });
     }
 
-    public async PlusProduct(productid: number, size: number) {
+    public async PlusProduct(productid: number, size: number | string) {
         return await this.SendAsync<ICart>({
             ApiType: ApiType.POST,
             Url: 'plus',
@@ -42,7 +42,7 @@ class CartAPI extends BaseAPI {
         });
     }
 
-    public async MinusProduct(productid: number, size: number) {
+    public async MinusProduct(productid: number, size: number | string) {
         return await this.SendAsync<ICart>({
             ApiType: ApiType.POST,
             Url: 'minus',

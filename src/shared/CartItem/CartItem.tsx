@@ -6,10 +6,7 @@ import { IProductCart } from '../../models/Models/Cart/CartModels';
 import ButtonMain from '../../UI/ButtonMain/ButtonMain';
 import { AiOutlineMinus } from 'react-icons/ai';
 import { AiOutlinePlus } from 'react-icons/ai';
-import {
-    fetchMinusProductCart,
-    fetchPlusProductCart
-} from '../../store/reducers/Cart/Creators/CartCreator';
+import { fetchMinusProductCart, fetchPlusProductCart } from '../../store/reducers/Cart/Creators/CartCreator';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 interface ICartItem {
@@ -18,25 +15,20 @@ interface ICartItem {
 
 const CartItem: FC<ICartItem> = ({ product }) => {
     const disptach = useAppDispatch();
-    const { isLoadingPlus, isLoadingMinus } = useAppSelector(
-        state => state.cartReducer
-    );
+    const { isLoadingPlus, isLoadingMinus } = useAppSelector(state => state.cartReducer);
 
     const onPlusProduct = () => {
-        disptach(fetchPlusProductCart(product.id, Number(product.size)));
+        disptach(fetchPlusProductCart(product.id, product.size));
     };
 
     const onMinusProduct = () => {
-        disptach(fetchMinusProductCart(product.id, Number(product.size)));
+        disptach(fetchMinusProductCart(product.id, product.size));
     };
 
     return (
         <div className='cart-item'>
             <Link className='cart-item__link' to={product.id + ''}>
-                <img
-                    src={PRODUCT_API_ADDRESS + product.images.split(';')[0]}
-                    alt=''
-                />
+                <img src={PRODUCT_API_ADDRESS + product.images.split(';')[0]} alt='' />
             </Link>
             <div className='cart-item__text'>
                 <div className='cart-item__text-container'>
@@ -59,9 +51,7 @@ const CartItem: FC<ICartItem> = ({ product }) => {
                             backGround='gray'
                             isLoading={isLoadingMinus}
                         />
-                        <span className='cart-item__product-count'>
-                            {product.count}
-                        </span>
+                        <span className='cart-item__product-count'>{product.count}</span>
                         <ButtonMain
                             isLoading={isLoadingPlus}
                             sizeSpinner={17}
@@ -75,12 +65,10 @@ const CartItem: FC<ICartItem> = ({ product }) => {
                             backGround='gray'
                         />
                     </div>
-                    <h3 className='cart-item__size'>{product.size} EU</h3>
+                    <h3 className='cart-item__size'>{!isNaN(Number(product.size)) ? product.size + " EU" : product.size}</h3>
                 </div>
             </div>
-            <div className='cart-item__price'>
-                {product.price.toLocaleString()} ₽
-            </div>
+            <div className='cart-item__price'>{product.price.toLocaleString()} ₽</div>
         </div>
     );
 };

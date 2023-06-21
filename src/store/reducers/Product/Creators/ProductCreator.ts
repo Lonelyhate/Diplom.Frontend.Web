@@ -6,11 +6,23 @@ import { productNewSlice } from '../Slices/ProductNewSlice';
 import { productSlice } from '../Slices/ProductSlice';
 import { IProductsFilterRequestModel } from '../../../../models/Models/Product/ProductsFilterRequsetModel';
 
-export const fetchProductAll = () => async (dispatch: AppDispatch) => {
+export const fetchProductAll = (request?: IProductsFilterRequestModel) => async (dispatch: AppDispatch) => {
     let response;
     try {
         dispatch(productSlice.actions.productLoading());
-        response = await ProductApi.GetAllProduct();
+        response = await ProductApi.GetAllProduct(
+            undefined,
+            undefined,
+            false,
+            request?.sort,
+            request?.minPrice,
+            request?.maxPrice,
+            request?.gender,
+            request?.category,
+            request?.sizes,
+            request?.brands,
+            request?.search
+        );
         if (!response.isSuccess) {
             dispatch(productSlice.actions.productError(response.displayMessage!));
             return;
@@ -74,14 +86,25 @@ export const fetchNewProducts = (requset: IProductsFilterRequestModel) => async 
     let response;
     try {
         dispatch(productSlice.actions.productNewLoading());
-        response = await ProductApi.GetAllProduct(undefined, undefined, true, requset.sort);
+        response = await ProductApi.GetAllProduct(
+            undefined,
+            undefined,
+            true,
+            requset.sort,
+            requset.minPrice,
+            requset.maxPrice,
+            requset.gender,
+            requset.category,
+            requset.sizes,
+            requset.brands
+        );
         if (!response.isSuccess) {
             dispatch(productSlice.actions.productError(response.displayMessage!));
             return;
         }
         dispatch(productSlice.actions.productsNewAll(response.data!));
     } catch (e) {
-        console.log(e)
+        console.log(e);
         dispatch(productSlice.actions.productError('Product by id error'));
     }
 };

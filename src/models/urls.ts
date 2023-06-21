@@ -1,7 +1,4 @@
 export const HOME_URL = '/';
-export const MAN_URL = HOME_URL + 'man';
-export const WOMAN_URL = HOME_URL + 'woman';
-export const BRANDS_URL = HOME_URL + 'brands';
 export const FAVORITES_URL = HOME_URL + 'favorites';
 export const LOYALTY_URL = HOME_URL + 'loyalty';
 export const CONTACT_URL = HOME_URL + 'contact';
@@ -14,7 +11,11 @@ export const CATALOG_PAGE_URL = HOME_URL + "catalog"
 export const ORDER_SUCCESS_URL = HOME_URL + "orders/success"
 
 export const NEWS_PAGE_URL = CATALOG_PAGE_URL + "/news"
+export const BRANDS_URL = CATALOG_PAGE_URL
+export const MAN_URL = CATALOG_PAGE_URL + '/man';
+export const WOMAN_URL = CATALOG_PAGE_URL + '/woman';
 export const ACCESSORIES_PAGE_URL = CATALOG_PAGE_URL + "/accessories"
+export const SEARCH_PAGE_URL = CATALOG_PAGE_URL + "/search"
 
 export const FAQ_URL = HOME_URL + 'faq';
 export const SHIPPING_FAQ_URL = FAQ_URL + '/shipping_faq';
@@ -25,8 +26,8 @@ export const ORDERS_URL = ACCOUNT_URL + '/orders';
 export const DISCOUNT_URL = ACCOUNT_URL + '/discount';
 export const ADDRESS_URL = ACCOUNT_URL + '/address';
 
-export const ADMIN_URL = HOME_URL + 'admin';
-export const ADMIN_PRODUCT_URL = ADMIN_URL + '/product';
+export const ADMIN_URL = HOME_URL + 'admin/product';
+export const ADMIN_PRODUCT_URL = ADMIN_URL;
 export const ADMIN_BLOG_URL = ADMIN_URL + '/blog';
 
 export class Urls {

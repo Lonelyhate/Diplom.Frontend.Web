@@ -7,14 +7,38 @@ import CheckboxMain from '../../../../UI/CheckboxMain/CheckboxMain';
 import { useAppSelector } from '../../../../hooks/redux';
 import { sizes, sizesClothes } from '../../../../models/Models/Product/Sizes';
 
-const Filter: FC = () => {
+interface IFilter {
+    minPrice: number;
+    maxPrice: number;
+    setMinMax: (value: number[]) => void;
+    genders: number[];
+    setGenders: (value: number[]) => void;
+    categoriesAr: number[];
+    setCategoriesAr: (value: number[]) => void;
+    sizesAr: number[];
+    setSizesAr: (value: number[]) => void;
+    brandsAr: number[];
+    setBrandsAr: (value: number[]) => void;
+    category: 'news' | 'man' | 'accessories' | string | undefined;
+}
+
+const Filter: FC<IFilter> = ({
+    maxPrice,
+    minPrice,
+    setMinMax,
+    genders,
+    setGenders,
+    categoriesAr,
+    setCategoriesAr,
+    sizesAr,
+    setSizesAr,
+    brandsAr,
+    setBrandsAr,
+    category
+}) => {
     const { categories } = useAppSelector(state => state.categoryReducer);
     const { brands } = useAppSelector(state => state.brandReducer);
-    const [priceStartEnd, setPriceStartEnd] = useState<number[]>([1000, 10000]);
-    const [genders, setGenders] = useState<any[]>([]);
-    const [categoriesAr, setCategoriesAr] = useState<any[]>([]);
-    const [sizesAr, setSizesAr] = useState<any[]>([]);
-    const [brandsAr, setBrandsAr] = useState<any[]>([]);
+    const [priceStartEnd, setPriceStartEnd] = useState<number[]>([minPrice, maxPrice]);
 
     return (
         <div className='filter'>
@@ -36,28 +60,45 @@ const Filter: FC = () => {
                 trackClassName='filter__track'
                 defaultValue={[priceStartEnd[0], priceStartEnd[1]]}
                 renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-                min={1000}
-                max={10000}
+                min={minPrice}
+                max={maxPrice}
                 pearling
                 minDistance={1}
+                onAfterChange={(value, index) => {
+                    setMinMax(value);
+                }}
                 onChange={(value, index) => setPriceStartEnd(value)}
             />
             <h3 className='filter__subtitle'>Пол</h3>
             <ul className='filter__genders'>
-                {Gender.Array.map(item => (
-                    <li key={item.value} className='filter__gender'>
-                        <CheckboxMain setValues={setGenders} values={genders} value={item.value} text={item.name} />
+                {category == 'man' ? (
+                    <li key={Gender.Array[2].value} className='filter__gender'>
+                        <CheckboxMain setValues={setGenders} values={genders} value={Gender.Array[2].value} text={Gender.Array[2].name} />
                     </li>
-                ))}
-            </ul>
-            <h3 className='filter__subtitle'>Категория</h3>
-            <ul className='filter__categories'>
-                {categories.map(item => (
-                    <li key={item.id} className='filter__category'>
-                        <CheckboxMain value={item.id} setValues={setCategoriesAr} text={item.name} values={categoriesAr} />
+                ) : category == 'woman' ? (
+                    <li key={Gender.Array[2].value} className='filter__gender'>
+                        <CheckboxMain setValues={setGenders} values={genders} value={Gender.Array[2].value} text={Gender.Array[2].name} />
                     </li>
-                ))}
+                ) : (
+                    Gender.Array.map(item => (
+                        <li key={item.value} className='filter__gender'>
+                            <CheckboxMain setValues={setGenders} values={genders} value={item.value} text={item.name} />
+                        </li>
+                    ))
+                )}
             </ul>
+            {category == '' && (
+                <>
+                    <h3 className='filter__subtitle'>Категория</h3>
+                    <ul className='filter__categories'>
+                        {categories.map(item => (
+                            <li key={item.id} className='filter__category'>
+                                <CheckboxMain value={item.id} setValues={setCategoriesAr} text={item.name} values={categoriesAr} />
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
             <h3 className='filter__subtitle'>Размер</h3>
             <ul className='filter__sizes'>
                 {sizes.map(item => (
@@ -73,11 +114,19 @@ const Filter: FC = () => {
             </ul>
             <h3 className='filter__subtitle'>Бренд</h3>
             <ul className='filter__brands'>
-                {brands.map(item => (
-                    <li key={item.id} className='filter__brand'>
-                        <CheckboxMain value={item.id} setValues={setBrandsAr} text={item.name} values={brandsAr} />
-                    </li>
-                ))}
+                {category?.indexOf('brand') == -1
+                    ? brands.map(item => (
+                          <li key={item.id} className='filter__brand'>
+                              <CheckboxMain value={item.id} setValues={setBrandsAr} text={item.name} values={brandsAr} />
+                          </li>
+                      ))
+                    : brands
+                          .filter(item => item.id.toString() === category!.split('-')[1])
+                          .map(item => (
+                              <li key={item.id} className='filter__brand'>
+                                  <CheckboxMain value={item.id} setValues={setBrandsAr} text={item.name} values={brandsAr} />
+                              </li>
+                          ))}
             </ul>
         </div>
     );

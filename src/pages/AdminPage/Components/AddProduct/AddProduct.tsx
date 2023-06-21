@@ -25,6 +25,8 @@ import AddBrand from '../AddBrand/AddBrand';
 interface IAddProduct {
     visable: boolean;
     closeModal: () => void;
+    notify: boolean
+    setNotify: (value: boolean) => void;
 }
 
 type eventClick = MouseEvent & {
@@ -33,7 +35,7 @@ type eventClick = MouseEvent & {
     };
 };
 
-const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
+const AddProduct: FC<IAddProduct> = ({ visable, closeModal, setNotify }) => {
     const dispatch = useAppDispatch();
     const [modalAddBrand, setModalAddBrand] = useState<boolean>(false);
     const { brands } = useAppSelector(state => state.brandReducer);
@@ -46,7 +48,7 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
     const [descr, setDescr] = useState<string>('');
     const [images, setImages] = useState<File[]>([]);
     const [sizes, setSizes] = useState<any>([]);
-    const [gender, setGender] = useState<GenderArrayType>(Gender.Array[0]);
+    const [gender, setGender] = useState<GenderArrayType | null>(Gender.Array[0]);
     const contentRef = useRef(null);
 
     useEffect(() => {
@@ -77,7 +79,6 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
     };
 
     const sendRequest = async () => {
-        console.log(gender)
         if (sizes && sizes.length == 0)
         {
             setSizes(["ONE SIZE"])
@@ -90,10 +91,20 @@ const AddProduct: FC<IAddProduct> = ({ visable, closeModal }) => {
             codeProduct: codeProduct,
             description: descr,
             price: price,
-            gender: gender.value,
+            gender: gender!.value,
             images: images
         };
         dispatch(fetchProductCreate(requestModel));
+        closeModal()
+        setNotify(true)
+        setName("")
+        setBrand(null)
+        setGender(null)
+        setCategory(null)
+        setPrice("")
+        setCodProduct("")
+        setDescr("")
+        setImages([])
     };
 
     return (

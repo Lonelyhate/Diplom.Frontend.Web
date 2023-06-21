@@ -48,7 +48,7 @@ export const fetchDeleteAllProductsCart = () => async (dispatch: AppDispatch) =>
     }
 };
 
-export const fetchPlusProductCart = (productId: number, size: number) => async (dispatch: AppDispatch) => {
+export const fetchPlusProductCart = (productId: number, size: number | string) => async (dispatch: AppDispatch) => {
     let response;
     try {
         dispatch(cartSlice.actions.cartLoadingPlus());
@@ -63,7 +63,7 @@ export const fetchPlusProductCart = (productId: number, size: number) => async (
     }
 };
 
-export const fetchMinusProductCart = (productId: number, size: number) => async (dispatch: AppDispatch) => {
+export const fetchMinusProductCart = (productId: number, size: number | string) => async (dispatch: AppDispatch) => {
     let response;
     try {
         dispatch(cartSlice.actions.cartLoadingMinus());

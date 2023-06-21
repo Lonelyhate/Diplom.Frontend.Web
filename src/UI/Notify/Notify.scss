@@ -1,0 +1,23 @@
+@import "../../styles/variables.scss";
+
+.notify {
+    padding: 20px 40px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+    background-color: #d4d4d4;
+    border-radius: 8px;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    &__text {
+        font-size: 14px;
+    }
+    &.visable {
+        opacity: 1;
+        pointer-events: all;
+        visibility: visible;
+    }
+}

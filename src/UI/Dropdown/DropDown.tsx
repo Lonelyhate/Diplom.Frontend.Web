@@ -45,8 +45,11 @@ const DropDown: FC<IDropDown> = ({
     const onClickItem = (item: dropDownItem) => {
         setCurrentValue(item);
         setListActive(false);
-        onClickFunc && onClickFunc();
     };
+
+    useEffect(() => {
+        onClickFunc && onClickFunc();
+    }, [currentValue])
 
     return (
         <div

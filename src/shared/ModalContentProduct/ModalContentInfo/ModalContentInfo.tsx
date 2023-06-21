@@ -47,7 +47,7 @@ const ModalContentInfo: FC<IModalContentInfo> = ({ product }) => {
                             onClick={() => {
                                 setActiveSize(item);
                             }}
-                            text={item + ' EU'}
+                            text={!isNaN(Number(item)) ? item + ' EU' : item}
                         />
                     </li>
                 ))}
@@ -60,7 +60,7 @@ const ModalContentInfo: FC<IModalContentInfo> = ({ product }) => {
                         onClick={onSendProductToCart}
                         height={56}
                         backGround='primary'
-                        text={['Добавить в корзину', activeSize + ' EU']}
+                        text={['Добавить в корзину', !isNaN(Number(activeSize)) ? activeSize + ' EU' : activeSize]}
                     />
                 </div>
             </div>

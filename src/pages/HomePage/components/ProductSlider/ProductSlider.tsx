@@ -24,6 +24,7 @@ const ProductSlider: FC<IProductSlider> = ({ items }) => {
             <Swiper
                 modules={[Navigation, Pagination]}
                 slidesPerView={4}
+                slidesPerGroup={4}
                 navigation={{
                     nextEl: '.products-slider__next',
                     prevEl: '.products-slider__left'
